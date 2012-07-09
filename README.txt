@@ -194,7 +194,15 @@ Notes on implementation and use
 * You can give a dimension to complex numbers in the same way as real 
   numbers--for example ``(2.1e3 + 3.9e4j) * ohm``.
 
-* I tested only in Python 2.7, but as far as I can tell it should be compatible with any Python version 2.x or 3.x. Please email me if you have checked.
+* I tested only in Python 2.7, but as far as I can tell it should be
+  compatible with any Python version 2.x or 3.x. Please email me if you have
+  checked.
+
+* If you get overflows or underflows, you can edit the unit initializations.
+  For example, the package sets the meter to a numerical value between 0.1
+  and 10. Therefore, if you're doing molecular simulation, most lengths you
+  use will be tiny numbers. You should probably set the meter instead to be
+  between, say, 1e8 and 1e10.
 
 Notes on unit definitions
 -------------------------

@@ -1,1 +1,2 @@
 ﻿version 1.0, 2012-07-08 -- initial release
+version 1.01, 2012-07-09 -- edited README
