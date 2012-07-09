@@ -1,0 +1,3 @@
+include LICENSE.txt
+include Changes.txt
+exclude MANIFEST.in
