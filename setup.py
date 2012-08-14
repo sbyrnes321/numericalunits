@@ -24,7 +24,7 @@ setup(
     keywords = "units, quantities, physical constants, dimensional analysis",
     url = "http://pypi.python.org/pypi/numericalunits",
     py_modules=['numericalunits'],
-    long_description=read('README.txt'),
+    long_description=read('README.rst'),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Science/Research",
