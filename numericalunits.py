@@ -14,18 +14,20 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 from math import pi
 import random
 
-__version__ = 1.01
+__version__ = 1.1
 
 def reset_units(seed=None):
     """
     Set all units to new, self-consistent, floating-point values. See package
-    documentation for detailed explanation and examples.
+    documentation for detailed explanation and examples:
+    http://pypi.python.org/pypi/numericalunits
     
     reset_units() --> units are randomized. This is the suggested use. Run this
     before your calculation, display the final answer, then re-run this, then
     re-disply the final answer. If you get the same answers both times, then
     your calculations are almost guaranteed to be free of
-    dimensional-analysis-violating errors.
+    dimensional-analysis-violating errors. reset_units() is run automatically
+    the first time this module is imported.
     
     reset_units('SI') --> Set units so that all values are given in standard SI
     units (meters-kilograms-seconds) by default. In this mode, there is no way
@@ -43,15 +45,22 @@ def reset_units(seed=None):
         C = 1.
         K = 1.
     else:
+        prior_random_state = random.getstate()
+        
         if seed is None:
             random.seed()
         else:
             random.seed(seed)
+        
         m = 10. ** random.uniform(-1,1) #meter
         kg = 10. ** random.uniform(-1,1) #kilogram
         s = 10. ** random.uniform(-1,1) #second
         C = 10. ** random.uniform(-1,1) # coulombs
         K = 10. ** random.uniform(-1,1) # kelvins
+        
+        # Leave the random generator like I found it, in case something else is
+        # using it.
+        random.setstate(prior_random_state)
     
     set_derived_units_and_constants()
     return
@@ -186,11 +195,12 @@ def set_derived_units_and_constants():
     psi = lbf / inch**2
     
     # Power
-    global W, mW, uW, nW, kW, MW, GW, TW
+    global W, mW, uW, nW, pW, kW, MW, GW, TW
     W = J/s
     mW = 1e-3 * W
     uW = 1e-6 * W
     nW = 1e-9 * W
+    pW = 1e-12 * W
     kW = 1e3 * W
     MW = 1e6 * W
     GW = 1e9 * W
@@ -255,11 +265,13 @@ def set_derived_units_and_constants():
     Wb = J/A #weber
     
     # Capacitance and inductance
-    global F, uF, nF, pF, H, mH, uH, nH
+    global F, uF, nF, pF, fF, aF, H, mH, uH, nH
     F = C / V #farad
     uF = 1e-6 * F
     nF = 1e-9 * F
     pF = 1e-12 * F
+    fF = 1e-15 * F
+    aF = 1e-18 * F
     H = m**2 * kg / C**2 #henry
     mH = 1e-3 * H
     uH = 1e-6 * H
@@ -305,9 +317,12 @@ def set_derived_units_and_constants():
     Msolar = 1.98892e30 * kg #mass of the sun
     MEarth = 5.9736e24 * kg #mass of earth
 
+# Set units randomly when this module is initialized. (Don't worry: If the
+# module is imported many times from many places, this command will only
+# execute during the first import.)
+reset_units()
 
-
-if(False): #workaround so that Spyder IDE recognizes these variables as globals
+if False: #workaround so that Spyder IDE recognizes these variables as globals
     m=1
     kg=1
     s=1

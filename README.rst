@@ -4,7 +4,7 @@ numericalunits: Units and dimensional analysis compatible with everything
 
 `Package homepage at PyPI <http://pypi.python.org/pypi/numericalunits>`_ -- 
 `Source code at github <http://github.com/sbyrnes321/numericalunits>`_ -- 
-`Package author information <http://sjbyrnes.com>`_
+Written by `Steve Byrnes <http://sjbyrnes.com>`_
 
 This package implements units and dimensional analysis in an unconventional 
 way that has the following unique advantages:
@@ -46,10 +46,9 @@ what the units are, and then the package will tell you whether you made a
 mistake. Even worse, you only get alerted to the mistake after running a 
 calculation all the way through twice.
 
-Therefore the package is *not* suggested for students who are just learning 
-how units work and want spoon-fed answers. It *is* suggested for engineering 
-and science professionals who want to their code to be more self-documenting 
-and self-debugging.
+Therefore the package is *not* suggested for students exploring how units work.
+It *is* suggested for engineering and science professionals who want to make
+their code more self-documenting and self-debugging.
 
 Installation
 ============
@@ -158,10 +157,28 @@ Notes on implementation and use
 
 * The units should not be reset in the *middle* of a calculation. They 
   should be randomly chosen *once* at the beginning, then carried through 
-  consistently. For example, if multiple python modules need access to the 
-  unit definitions, use ``import numericalunits as nu`` in all of them, but 
-  make sure that ``nu.reset_units()`` is run only once at the very beginning 
-  of execution.
+  consistently. My advice on how to do that:
+  
+  * **For little, self-contained calculations, follow the examples above.** Put
+    ``reset_units()`` at the beginning of the calculation, then check for
+    dimensional errors by re-running the whole calculation (including the
+    ``reset_units()`` part). Note that if you are using ``from``-style imports,
+    like ``from numericalunits import cm``, you need to put them *after*
+    ``reset_units()`` in the code.
+
+  * **For more complicated calculations, don't use reset_units() at all.
+    Instead, check for dimensional errors by re-running the calculation in a new
+    Python session.** (By "complicated" I mainly mean "involving modules".)
+    
+    * (Why does this work? Because the first time ``numericalunits`` is imported
+      in a given Python session, ``reset_units()`` is run automatically. That
+      happens only once, so multiple modules can ``import numericalunits``, and
+      they will all share a random, but self-consistent, set of units.)
+    
+    * (If you want to check for dimensional errors but you really really don't
+      want to open a new Python session, you need to ``reset_units()`` *and*
+      reload every module that has dimensionful variables in its namespace. It's
+      not impossible, but it's annoying and error-prone.)
 
 * While debugging a program, it may be annoying to have intermediate values 
   in the calculation that randomly vary every time you run the program. In 
@@ -172,14 +189,6 @@ Notes on implementation and use
   the seed for the random-number generator. Obviously, in these modes, you
   will *not* get any indication of dimensional-analysis errors.
 
-* ``from``-style imports are not supported!! (The fundamental problem is 
-  that ``float``'s are immutable...so ``reset_units()`` will not work as 
-  expected.) In other words,
-
-  - **Do not use** ``from numericalunits import *``
-  - **Do not use** ``from numericalunits import cm``
-  - etc.
-
 * There are very rare, strange cases where the final answer does not seem to 
   randomly vary even though there was a dimensional-analysis violation: For 
   example, the expression ``(1 + 1e-50 * cm / atm)`` fails dimensional 
@@ -187,22 +196,31 @@ Notes on implementation and use
   only randomly varying around the 50th decimal point, so the variation is
   hidden from view. You would not notice it as an error.
 
-* Since units are normal Python floating-point numbers, they follow the 
-  normal casting rules. For example, ``2 * cm`` is a python ``float``, not an 
-  ``int``. This is usually the sensible and desired behavior.
+* Since units are normal Python ``float``-type numbers, they follow the normal
+  casting rules. For example, ``2 * cm`` is a python ``float``, not an ``int``.
+  This is usually what you would want and expect.
 
 * You can give a dimension to complex numbers in the same way as real 
   numbers--for example ``(2.1e3 + 3.9e4j) * ohm``.
 
 * I tested only in Python 2.7, but as far as I can tell it should be
-  compatible with any Python version 2.x or 3.x. Please email me if you have
-  checked.
+  compatible with any Python version 2.x or 3.x. Please
+  `email me <http://sjbyrnes.com>`_ if you have checked.
 
 * If you get overflows or underflows, you can edit the unit initializations.
   For example, the package sets the meter to a numerical value between 0.1
   and 10. Therefore, if you're doing molecular simulation, most lengths you
   use will be tiny numbers. You should probably set the meter instead to be
   between, say, 1e8 and 1e10.
+
+* Some numerical routines use a default *absolute* tolerance, rather than
+  relative tolerance, to decide convergence. This can cause the calculation
+  result to randomly vary even though there is no dimensional analysis error.
+  When this happens, you should set the absolute tolerance to a value with the
+  appropriate units. Alternatively, you can scale the data before running the
+  algorithm and scale it back afterwards. Maybe this sounds like a hassle, but
+  it's actually a benefit: If your final result is very sensitive to some
+  numerical tolerance setting, then you really want to be aware of that.
 
 Notes on unit definitions
 -------------------------

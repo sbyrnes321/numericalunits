@@ -1,2 +1,7 @@
 ﻿version 1.0, 2012-07-08 -- initial release
+
 version 1.01, 2012-07-09 -- edited README
+
+version 1.1, 2013-02-20 -- reset_units() runs on first import, and corresponding
+changes to documentation. Also, don't mess up the random number generator
+state, in case something else is using it. Added units pW, fF, aF.
