@@ -1,3 +1,4 @@
 include LICENSE.txt
 include Changes.txt
+include README.rst
 exclude MANIFEST.in

@@ -5,3 +5,6 @@ version 1.01, 2012-07-09 -- edited README
 version 1.1, 2013-02-20 -- reset_units() runs on first import, and corresponding
 changes to documentation. Also, don't mess up the random number generator
 state, in case something else is using it. Added units pW, fF, aF.
+
+version 1.11, 2013-02-21 -- fix packaging (edit MANIFEST.in so README gets
+included).

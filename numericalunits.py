@@ -14,7 +14,7 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 from math import pi
 import random
 
-__version__ = 1.1
+__version__ = 1.11
 
 def reset_units(seed=None):
     """
