@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 For information and usage see README, or http://pypi.python.org/pypi/numericalunits
 """
