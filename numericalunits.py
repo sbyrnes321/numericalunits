@@ -36,7 +36,7 @@ def reset_units(seed=None):
     reset_units(x) --> If you pass any other argument x, it's used as the seed
     for the random number generator.
     """
-    global m, kg, s, C, K
+    global m, kg, s, C, K, molecule
     
     if seed == 'SI':
         m = 1.
@@ -44,6 +44,7 @@ def reset_units(seed=None):
         s = 1.
         C = 1.
         K = 1.
+        molecule = 1.
     else:
         prior_random_state = random.getstate()
         
@@ -57,6 +58,7 @@ def reset_units(seed=None):
         s = 10. ** random.uniform(-1,1) #second
         C = 10. ** random.uniform(-1,1) # coulombs
         K = 10. ** random.uniform(-1,1) # kelvins
+        molecule = 10. ** random.uniform(-1,1) # molecule
         
         # Leave the random generator like I found it, in case something else is
         # using it.
@@ -174,7 +176,7 @@ def set_derived_units_and_constants():
     N = (kg * m)/s**2 #newton
     dyn = 1e-5 * N #dyne
     lbf = 4.4482216152605 * N #pound-force (international avoirdupois pound)
-	
+    
     # Pressure
     global Pa, hPa, kPa, MPa, GPa, bar, mbar, cbar, dbar, kbar, Mbar, atm, \
            torr, mtorr, psi
@@ -218,7 +220,7 @@ def set_derived_units_and_constants():
     nC = 1e-9 * C
     Ah = 3600. * C #amp-hour
     mAh = 1e-3 * Ah
-	
+    
     # Current
     global A, mA, uA, nA, pA, fA
     A = C/s
@@ -227,7 +229,7 @@ def set_derived_units_and_constants():
     nA = 1e-9 * A
     pA = 1e-12 * A
     fA = 1e-15 * A
-	
+    
     # Voltage
     global V, mV, uV, nV, kV, MV, GV, TV
     V = J/C
@@ -293,8 +295,8 @@ def set_derived_units_and_constants():
     #Constants--chemistry, atomic physics, electrons
     global NA, mol, Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
            ARichardson, Phi0, KJos, RKlitz
-    NA = 6.02214129e23  #Avogadro's number
-    mol = NA  #1 mole (see README)
+    NA = 6.02214129e23 #Avogadro's number
+    mol = molecule * NA #1 mole (see README)
     Rgas = kB #ideal gas constant (see README)
     e = 1.602176565e-19 * C  #charge of proton
     uBohr = 9.27400968e-24 * J/T  #Bohr magneton
@@ -317,6 +319,14 @@ def set_derived_units_and_constants():
     Msolar = 1.98892e30 * kg #mass of the sun
     MEarth = 5.9736e24 * kg #mass of earth
 
+    #Concentrations
+    global M, mM, uM, nM, pM
+    M = mol / L # 1 Molar
+    mM = 1e-3 * M
+    uM = 1e-6 * M
+    nM = 1e-9 * M
+    pM = 1e-12 * M
+
 # Set units randomly when this module is initialized. (Don't worry: If the
 # module is imported many times from many places, this command will only
 # execute during the first import.)
@@ -328,3 +338,4 @@ if False: #workaround so that Spyder IDE recognizes these variables as globals
     s=1
     K=1
     C=1
+    molecule=1

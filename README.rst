@@ -120,7 +120,6 @@ at 41mm, and express the answer in mV. ::
     f = interp1d(voltage_data[:,0], voltage_data[:,1])
     f(41 * nu.mm) / nu.mV # Answer --> 16200
 	
-
 **Example 4:** A unit mistake ... what is 1 cm expressed in atmospheres? ::
 
     import numericalunits as nu
@@ -128,6 +127,20 @@ at 41mm, and express the answer in mV. ::
     (1 * nu.cm) / nu.atm # --> a randomly-varying number
     # The answer randomly varies every time you run this, indicating that you
     # are violating dimensional analysis.
+
+**Example 5:** Working with moles:
+What is the concentration of 1 molecule inside the nucleus of a yeast cell? ::
+
+	import numericalunits as nu
+	nu.reset_units()
+
+	yeast_nucleus_volume = 2.9 * nu.um**3
+	# From: http://bionumbers.hms.harvard.edu/bionumber.aspx?&id=100447&ver=1
+
+	tf = 1. * nu.molecule # We only have one copy of the transcription factor
+	tf_conc = tf/ yeast_nucleus_volume
+	tf_conc / nu.uM # Answer --> 0.0005725
+
 
 How it works
 ============
