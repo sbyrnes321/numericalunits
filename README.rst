@@ -234,15 +234,24 @@ Notes on unit definitions
   always neatly cancel out of formulas.
 
 * The package does not keep track of "moles" as an independent unit assigned 
-  a random number; instead "mol" is just a pure number (~6e23), like you
-  would say "dozen"=12. One consequence, for example, is that the ideal gas
-  constant is exactly the same as the Boltzmann constant. There are two
-  reasons for this behavior: (1) If you mistakenly miss a factor of
-  Avogadro's number in a calculation, you will not need any help to see that
-  something is wrong, since the answer will be wrong by 24 orders of 
-  magnitude! (2) It is nice to be able to convert between (for example) 
-  kcal/mol and eV, without having to explicitly multiply or divide by
-  Avogadro's number.
+  a random number; instead ``mol`` is just a pure number (~6e23), like you
+  would say "dozen"=12. That means: (1) gram/mol is exactly the same as amu,
+  and Boltzmann constant is exactly the same as the ideal gas constant, and so
+  on. (2) You should rarely need to use Avogadro's number ``NA`` -- it is just a
+  synonym of ``mol`` (``NA = mol ~ 6e23``). Here are a few examples using moles: ::
+  
+      import numericalunits as nu
+      nu.reset_units()
+      
+      # There are eight copies of a protein inside a yeast nucleus of volume
+      # 3 cubic microns. What is the concentration of the protein, in micromolar (uM)?
+      (8. / (3 * nu.um**3)) / nu.uM   # Answer --> 0.0044
+      
+      # 5 kcal / mol is how many joules?
+      (5. * nu.kcal / nu.mol) / nu.J  # Answer --> 3.47e-20
+      
+      # How many molecules are in 2.3 femtomoles?
+      2.3 * nu.fmol  # Answer --> 1.39e9
 
 * The package cannot convert temperatures between Fahrenheit, Celsius, and 
   kelvin. The reason is that these scales have different zeros, so the units 

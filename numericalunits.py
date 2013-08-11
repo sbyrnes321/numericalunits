@@ -169,6 +169,22 @@ def set_derived_units_and_constants():
     Wh = 3600. * J #watt-hour
     kWh = 1e3 * Wh # kilowatt-hour
     
+    # Moles, concentration / molarity
+    global NA, mol, mmol, umol, nmol, pmol, fmol, M, mM, uM, nM, pM, fM
+    NA = 6.02214129e23  #Avogadro's number
+    mol = NA  #1 mole (see README)
+    mmol = 1e-3 * mol
+    umol = 1e-6 * mol
+    nmol = 1e-9 * mol
+    pmol = 1e-12 * mol
+    fmol = 1e-15 * mol
+    M = mol/L # molar
+    mM = 1e-3 * M
+    uM = 1e-6 * M
+    nM = 1e-9 * M
+    pM = 1e-12 * M
+    fM = 1e-15 * M
+    
     # Force
     global N, dyn, lbf
     N = (kg * m)/s**2 #newton
@@ -291,10 +307,8 @@ def set_derived_units_and_constants():
     alphaFS = 7.2973525698e-3  #fine-structure constant
     
     #Constants--chemistry, atomic physics, electrons
-    global NA, mol, Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
+    global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
            ARichardson, Phi0, KJos, RKlitz
-    NA = 6.02214129e23  #Avogadro's number
-    mol = NA  #1 mole (see README)
     Rgas = kB #ideal gas constant (see README)
     e = 1.602176565e-19 * C  #charge of proton
     uBohr = 9.27400968e-24 * J/T  #Bohr magneton
