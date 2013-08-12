@@ -203,9 +203,9 @@ Notes on implementation and use
 * You can give a dimension to complex numbers in the same way as real 
   numbers--for example ``(2.1e3 + 3.9e4j) * ohm``.
 
-* I tested only in Python 2.7, but as far as I can tell it should be
-  compatible with any Python version 2.x or 3.x. Please
-  `email me <http://sjbyrnes.com>`_ if you have checked.
+* Should be compatible with any Python version 2.x or 3.x. If you find bugs,
+  please tell me by `email <http://sjbyrnes.com>`_ or 
+  `github issue board <https://github.com/sbyrnes321/numericalunits/issues>`_.
 
 * If you get overflows or underflows, you can edit the unit initializations.
   For example, the package sets the meter to a numerical value between 0.1
