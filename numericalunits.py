@@ -73,7 +73,7 @@ def set_derived_units_and_constants():
     """
     
     # Length
-    global cm, mm, um, nm, pm, fm, km, angstrom, lightyear, \
+    global cm, mm, um, nm, pm, fm, km, angstrom, Å, lightyear, \
         astro_unit, pc, kpc, Mpc, Gpc, inch, foot, mile, thou
     cm = 1e-2 * m
     mm = 1e-3 * m
@@ -83,6 +83,7 @@ def set_derived_units_and_constants():
     fm = 1e-15 * m
     km = 1e3 * m
     angstrom = 1e-10 * m
+    Å = angstrom
     lightyear = 9460730472580800. * m
     astro_unit = 149597870700. * m #astronomical unit
     pc = (648000./pi) * astro_unit; #parsec
@@ -223,9 +224,13 @@ def set_derived_units_and_constants():
     TW = 1e12 * W
     
     # Temperature
-    global degFinterval, degCinterval
+    global degFinterval, degCinterval, mK, uK, nK, pK
     degFinterval = (5./9.) * K # A temperature difference in degrees Fahrenheit
     degCinterval = K # A temperature difference in degrees Celsius
+    mK = 1e-3 * K
+    uK = 1e-6 * K
+    nK = 1e-9 * K
+    pK = 1e-12 * K
     
     # Charge
     global mC, uC, nC, Ah, mAh
@@ -294,13 +299,14 @@ def set_derived_units_and_constants():
     nH = 1e-9 * H
        
     #Constants--general
-    global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
+    global c0, mu0, eps0, Z0, hPlanck, hbar, ħ, kB, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
     mu0 = 4. * pi * 1e-7 * N/A**2  #magnetic constant, permeability of vacuum
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
     hPlanck = 6.62606957e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
+    ħ = hbar
     kB = 1.3806488e-23 * J/K  #Boltzmann constant
     GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
