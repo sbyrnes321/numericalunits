@@ -14,7 +14,7 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 from math import pi
 import random
 
-__version__ = 1.13
+__version__ = 1.14
 
 def reset_units(seed=None):
     """
@@ -73,7 +73,7 @@ def set_derived_units_and_constants():
     """
     
     # Length
-    global cm, mm, um, nm, pm, fm, km, angstrom, Å, lightyear, \
+    global cm, mm, um, nm, pm, fm, km, angstrom, lightyear, \
         astro_unit, pc, kpc, Mpc, Gpc, inch, foot, mile, thou
     cm = 1e-2 * m
     mm = 1e-3 * m
@@ -83,10 +83,10 @@ def set_derived_units_and_constants():
     fm = 1e-15 * m
     km = 1e3 * m
     angstrom = 1e-10 * m
-    Å = angstrom
+    globals()['Å'] = angstrom # shorter alias (only works in Python 3)
     lightyear = 9460730472580800. * m
     astro_unit = 149597870700. * m #astronomical unit
-    pc = (648000./pi) * astro_unit; #parsec
+    pc = (648000./pi) * astro_unit #parsec
     kpc = 1e3 * pc
     Mpc = 1e6 * pc
     Gpc = 1e9 * pc
@@ -299,14 +299,14 @@ def set_derived_units_and_constants():
     nH = 1e-9 * H
        
     #Constants--general
-    global c0, mu0, eps0, Z0, hPlanck, hbar, ħ, kB, GNewton, sigmaSB, alphaFS
+    global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
     mu0 = 4. * pi * 1e-7 * N/A**2  #magnetic constant, permeability of vacuum
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
     hPlanck = 6.62606957e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
-    ħ = hbar
+    globals()['ħ'] = hbar # shorter alias (only works in Python 3)
     kB = 1.3806488e-23 * J/K  #Boltzmann constant
     GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant

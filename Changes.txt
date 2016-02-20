@@ -13,3 +13,6 @@ version 1.12, 2013-06-22 -- fix packaging (remove UTF-8 BOM in .py files,
 which seem to cause pip errors in python 3)
 
 version 1.13, 2013-08-11 -- add more units related to moles and molarity
+
+version 1.14, 2016-02-16 -- add millikelvin etc., and unicode aliases Å,
+ħ (note that unicode identifiers only work in Python 3)
