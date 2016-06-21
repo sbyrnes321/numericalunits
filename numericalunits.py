@@ -12,7 +12,6 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 
 
 from math import pi
-import random
 
 __version__ = 1.14
 
@@ -36,6 +35,8 @@ def reset_units(seed=None):
     reset_units(x) --> If you pass any other argument x, it's used as the seed
     for the random number generator.
     """
+    import random
+    
     global m, kg, s, C, K
     
     if seed == 'SI':
