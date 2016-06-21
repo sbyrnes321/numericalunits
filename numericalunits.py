@@ -20,25 +20,25 @@ def reset_units(seed=None):
     Set all units to new, self-consistent, floating-point values. See package
     documentation for detailed explanation and examples:
     http://pypi.python.org/pypi/numericalunits
-    
+
     reset_units() --> units are randomized. This is the suggested use. Run this
     before your calculation, display the final answer, then re-run this, then
     re-disply the final answer. If you get the same answers both times, then
     your calculations are almost guaranteed to be free of
     dimensional-analysis-violating errors. reset_units() is run automatically
     the first time this module is imported.
-    
+
     reset_units('SI') --> Set units so that all values are given in standard SI
     units (meters-kilograms-seconds) by default. In this mode, there is no way
     to test for dimensional-analysis-violating errors.
-    
+
     reset_units(x) --> If you pass any other argument x, it's used as the seed
     for the random number generator.
     """
     import random
-    
+
     global m, kg, s, C, K
-    
+
     if seed == 'SI':
         m = 1.
         kg = 1.
@@ -47,22 +47,22 @@ def reset_units(seed=None):
         K = 1.
     else:
         prior_random_state = random.getstate()
-        
+
         if seed is None:
             random.seed()
         else:
             random.seed(seed)
-        
+
         m = 10. ** random.uniform(-1,1) #meter
         kg = 10. ** random.uniform(-1,1) #kilogram
         s = 10. ** random.uniform(-1,1) #second
         C = 10. ** random.uniform(-1,1) # coulombs
         K = 10. ** random.uniform(-1,1) # kelvins
-        
+
         # Leave the random generator like I found it, in case something else is
         # using it.
         random.setstate(prior_random_state)
-    
+
     set_derived_units_and_constants()
     return
 
@@ -72,7 +72,7 @@ def set_derived_units_and_constants():
     floating-point values, this function sets all other units and constants
     to the appropriate, self-consistent values.
     """
-    
+
     # Length
     global cm, mm, um, nm, pm, fm, km, angstrom, lightyear, \
         astro_unit, pc, kpc, Mpc, Gpc, inch, foot, mile, thou
@@ -95,7 +95,7 @@ def set_derived_units_and_constants():
     foot = 12. * inch
     mile = 5280. * foot
     thou = 1e-3 * inch  #thousandth of an inch; also called mil
-    
+
     # Volume
     global L, mL, uL, nL, pL, fL, aL, kL, ML, GL
     L = 1e-3 * m**3 #liter
@@ -108,7 +108,7 @@ def set_derived_units_and_constants():
     kL = 1e3 * L
     ML = 1e6 * L
     GL = 1e9 * L
-        
+
     # Time
     global ms, us, ns, ps, fs, minute, hour, day, week, year
     ms = 1e-3 * s
@@ -121,7 +121,7 @@ def set_derived_units_and_constants():
     day = 24. * hour #solar day
     week = 7. * day
     year = 365.256363004 * day #sidereal year
-    
+
     # Frequency
     global Hz, mHz, kHz, MHz, GHz, THz, PHz
     Hz = 1./s
@@ -157,7 +157,7 @@ def set_derived_units_and_constants():
     Da = amu #Dalton
     kDa = 1e3 * Da
     lbm = 0.45359237 * kg # pound mass (international avoirdupois pound)
-    
+
     # Energy
     global J, mJ, uJ, nJ, pJ, fJ, kJ, MJ, GJ, erg, eV, meV, keV, MeV, GeV, \
            TeV, btu, smallcal, kcal, Wh, kWh
@@ -182,7 +182,7 @@ def set_derived_units_and_constants():
     kcal = 4184. * J  #kilocalorie ("large Calorie", "dietary Calorie")
     Wh = 3600. * J #watt-hour
     kWh = 1e3 * Wh # kilowatt-hour
-    
+
     # Moles, concentration / molarity
     global NA, mol, mmol, umol, nmol, pmol, fmol, M, mM, uM, nM, pM, fM
     NA = 6.02214129e23  #Avogadro's number
@@ -198,13 +198,13 @@ def set_derived_units_and_constants():
     nM = 1e-9 * M
     pM = 1e-12 * M
     fM = 1e-15 * M
-    
+
     # Force
     global N, dyn, lbf
     N = (kg * m)/s**2 #newton
     dyn = 1e-5 * N #dyne
     lbf = 4.4482216152605 * N #pound-force (international avoirdupois pound)
-	
+
     # Pressure
     global Pa, hPa, kPa, MPa, GPa, bar, mbar, cbar, dbar, kbar, Mbar, atm, \
            torr, mtorr, psi
@@ -220,10 +220,10 @@ def set_derived_units_and_constants():
     kbar = 1e3 * bar
     Mbar = 1e6 * bar
     atm = 101325. * Pa
-    torr = (1./760.) * atm 
+    torr = (1./760.) * atm
     mtorr = 1e-3 * torr
     psi = lbf / inch**2
-    
+
     # Power
     global W, mW, uW, nW, pW, kW, MW, GW, TW
     W = J/s
@@ -235,7 +235,7 @@ def set_derived_units_and_constants():
     MW = 1e6 * W
     GW = 1e9 * W
     TW = 1e12 * W
-    
+
     # Temperature
     global degFinterval, degCinterval, mK, uK, nK, pK
     degFinterval = (5./9.) * K # A temperature difference in degrees Fahrenheit
@@ -244,7 +244,7 @@ def set_derived_units_and_constants():
     uK = 1e-6 * K
     nK = 1e-9 * K
     pK = 1e-12 * K
-    
+
     # Charge
     global mC, uC, nC, Ah, mAh
     mC = 1e-3 * C
@@ -252,7 +252,7 @@ def set_derived_units_and_constants():
     nC = 1e-9 * C
     Ah = 3600. * C #amp-hour
     mAh = 1e-3 * Ah
-	
+
     # Current
     global A, mA, uA, nA, pA, fA
     A = C/s
@@ -261,7 +261,7 @@ def set_derived_units_and_constants():
     nA = 1e-9 * A
     pA = 1e-12 * A
     fA = 1e-15 * A
-	
+
     # Voltage
     global V, mV, uV, nV, kV, MV, GV, TV
     V = J/C
@@ -272,7 +272,7 @@ def set_derived_units_and_constants():
     MV = 1e6 * V
     GV = 1e9 * V
     TV = 1e12 * V
-    
+
     # Resistance and conductivity
     global ohm, mohm, kohm, Mohm, Gohm, S, mS, uS, nS
     ohm = V / A
@@ -284,7 +284,7 @@ def set_derived_units_and_constants():
     mS = 1e-3 * S
     uS = 1e-6 * S
     nS = 1e-9 * S
-    
+
     # Magnetic fields and fluxes
     global T, mT, uT, nT, G, mG, uG, kG, Oe, Wb
     T = (V * s) / m**2 #tesla
@@ -297,7 +297,7 @@ def set_derived_units_and_constants():
     kG = 1e3 * G
     Oe = (1000./(4.*pi)) * A/m #oersted
     Wb = J/A #weber
-    
+
     # Capacitance and inductance
     global F, uF, nF, pF, fF, aF, H, mH, uH, nH
     F = C / V #farad
@@ -310,7 +310,7 @@ def set_derived_units_and_constants():
     mH = 1e-3 * H
     uH = 1e-6 * H
     nH = 1e-9 * H
-       
+
     #Constants--general
     global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
@@ -324,7 +324,7 @@ def set_derived_units_and_constants():
     GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
     alphaFS = 7.2973525698e-3  #fine-structure constant
-    
+
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
            ARichardson, Phi0, KJos, RKlitz
@@ -342,7 +342,7 @@ def set_derived_units_and_constants():
     Phi0 = 2.067833758e-15 * Wb #magnetic flux quantum
     KJos = 4.83597870e14 * Hz / V #Josephson constant
     RKlitz = 2.58128074434e4 * ohm #von Klitzing constant
-    
+
     #Constants--astronomical and properties of earth
     global REarth, g0, Msolar, MEarth
     REarth = 6371. * km #radius of earth
