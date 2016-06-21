@@ -132,6 +132,18 @@ def set_derived_units_and_constants():
     THz = 1e12 * Hz
     PHz = 1e15 * Hz
     
+    # Angular frequency units
+    # Example: ω = 3 * kHz·2π means that ω is the angular frequency
+    #   corresponding to a rotation whose *ordinary* frequency is 3 kHz.
+    # Note: These only work in Python 3.
+    globals()['Hz·2π']  =  Hz * 2*pi
+    globals()['mHz·2π'] = mHz * 2*pi
+    globals()['kHz·2π'] = kHz * 2*pi
+    globals()['MHz·2π'] = MHz * 2*pi
+    globals()['GHz·2π'] = GHz * 2*pi
+    globals()['THz·2π'] = THz * 2*pi
+    globals()['PHz·2π'] = PHz * 2*pi
+
     # Mass
     global g, mg, ug, ng, pg, fg, tonne, amu, Da, kDa, lbm
     g = 1e-3 * kg
