@@ -14,7 +14,7 @@ from __future__ import division
 
 from math import pi
 
-__version__ = 1.14
+__version__ = 1.15
 
 def reset_units(seed=None):
     """

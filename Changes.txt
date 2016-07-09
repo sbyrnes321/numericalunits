@@ -16,3 +16,6 @@ version 1.13, 2013-08-11 -- add more units related to moles and molarity
 
 version 1.14, 2016-02-16 -- add millikelvin etc., and unicode aliases Å,
 ħ (note that unicode identifiers only work in Python 3)
+
+version 1.15, 2016-07-09 -- add angular frequency units Hz·2π, kHz·2π,
+etc. (note that unicode identifiers only work in Python 3)
