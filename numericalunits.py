@@ -32,7 +32,7 @@ g = mg = ug = ng = pg = fg = tonne = amu = Da = kDa = lbm = 0.
 J = mJ = uJ = nJ = pJ = fJ = kJ = MJ = GJ = erg = eV = meV = keV = MeV = GeV = \
     TeV = btu = smallcal = kcal = Wh = kWh = 0.
 NA = mol = mmol = umol = nmol = pmol = fmol = M = mM = uM = nM = pM = fM = 0.
-N = dyn = lbf = 0.
+N = mN = uN = nN = pN = fN = kN = MN = GN = dyn = lbf = 0.
 Pa = hPa = kPa = MPa = GPa = bar = mbar = cbar = dbar = kbar = Mbar = atm = \
     torr = mtorr = psi = 0.
 W = mW = uW = nW = pW = kW = MW = GW = TW = 0.
@@ -236,8 +236,16 @@ def set_derived_units_and_constants():
     fM = 1e-15 * M
 
     # Force
-    global N, dyn, lbf
+    global N, mN, uN, nN, pN, fN, kN, MN, GN, dyn, lbf
     N = (kg * m)/s**2 #newton
+    mN = 1e-3 * N
+    uN = 1e-6 * N
+    nN = 1e-9 * N
+    pN = 1e-12 * N
+    fN = 1e-15 * N
+    kN = 1e3 * N
+    MN = 1e6 * N
+    GN = 1e9 * N
     dyn = 1e-5 * N #dyne
     lbf = 4.4482216152605 * N #pound-force (international avoirdupois pound)
 
