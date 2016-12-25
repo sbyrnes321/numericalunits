@@ -16,6 +16,41 @@ from math import pi
 
 __version__ = 1.15
 
+
+########## Set all variables, to help introspection libraries ################
+# This part is functionally pointless, it only helps IDE autocompletion
+# / introspection libraries know that these variables exist. The actual
+# values are set below, using the "global" keyword inside functions.
+
+m = kg = s = C = K = 0.
+cm = mm = um = nm = pm = fm = km = angstrom = lightyear = \
+    astro_unit = pc = kpc = Mpc = Gpc = inch = foot = mile = thou = 0.
+L = mL = uL = nL = pL = fL = aL = kL = ML = GL = 0.
+ms = us = ns = ps = fs = minute = hour = day = week = year = 0.
+Hz = mHz = kHz = MHz = GHz = THz = PHz = 0.
+g = mg = ug = ng = pg = fg = tonne = amu = Da = kDa = lbm = 0.
+J = mJ = uJ = nJ = pJ = fJ = kJ = MJ = GJ = erg = eV = meV = keV = MeV = GeV = \
+    TeV = btu = smallcal = kcal = Wh = kWh = 0.
+NA = mol = mmol = umol = nmol = pmol = fmol = M = mM = uM = nM = pM = fM = 0.
+N = dyn = lbf = 0.
+Pa = hPa = kPa = MPa = GPa = bar = mbar = cbar = dbar = kbar = Mbar = atm = \
+    torr = mtorr = psi = 0.
+W = mW = uW = nW = pW = kW = MW = GW = TW = 0.
+degFinterval = degCinterval = mK = uK = nK = pK = 0.
+mC = uC = nC = Ah = mAh = 0.
+A = mA = uA = nA = pA = fA = 0.
+V = mV = uV = nV = kV = MV = GV = TV = 0.
+ohm = mohm = kohm = Mohm = Gohm = S = mS = uS = nS = 0.
+T = mT = uT = nT = G = mG = uG = kG = Oe = Wb = 0.
+F = uF = nF = pF = fF = aF = H = mH = uH = nH = 0.
+c0 = mu0 = eps0 = Z0 = hPlanck = hbar = kB = GNewton = sigmaSB = alphaFS = 0.
+Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = \
+    ARichardson = Phi0 = KJos = RKlitz = 0.
+REarth = g0 = Msolar = MEarth = 0.
+
+########################### Main code #######################################
+
+
 def reset_units(seed=None):
     """
     Set all units to new, self-consistent, floating-point values. See package
@@ -355,10 +390,3 @@ def set_derived_units_and_constants():
 # module is imported many times from many places, this command will only
 # execute during the first import.)
 reset_units()
-
-if False: #workaround so that Spyder IDE recognizes these variables as globals
-    m=1
-    kg=1
-    s=1
-    K=1
-    C=1
