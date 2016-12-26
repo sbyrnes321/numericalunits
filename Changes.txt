@@ -19,3 +19,6 @@ version 1.14, 2016-02-16 -- add millikelvin etc., and unicode aliases Å,
 
 version 1.15, 2016-07-09 -- add angular frequency units Hz·2π, kHz·2π,
 etc. (note that unicode identifiers only work in Python 3)
+
+version 1.16, 2016-12-25 -- add prefixed newtons (mN, kN, etc.), edit file
+so that code completion libraries are more likely to find the unit names.
