@@ -14,7 +14,7 @@ from __future__ import division
 
 from math import pi
 
-__version__ = 1.16
+__version__ = 1.17
 
 
 ########## Set all variables, to help introspection libraries ################
@@ -43,10 +43,22 @@ V = mV = uV = nV = kV = MV = GV = TV = 0.
 ohm = mohm = kohm = Mohm = Gohm = S = mS = uS = nS = 0.
 T = mT = uT = nT = G = mG = uG = kG = Oe = Wb = 0.
 F = uF = nF = pF = fF = aF = H = mH = uH = nH = 0.
-c0 = mu0 = eps0 = Z0 = hPlanck = hbar = kB = GNewton = sigmaSB = alphaFS = 0.
+c0 = mu0 = eps0 = Z0 = hPlanck = hbar = kBoltzmann = GNewton = sigmaSB = alphaFS = 0.
 Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = \
     ARichardson = Phi0 = KJos = RKlitz = 0.
 REarth = g0 = Msolar = MEarth = 0.
+b = kb = mb = gb = tb = eb = pb = zb = yb = \
+    kbit = mbit = gbit = tbit = ebit = pbit = zbit = ybit = \
+    Kib = Mib = Gib = Tib = Pib = Eib = Zib = Yib = \
+    Kibit = Mibit = Gibit = Tibit = Pibit = Eibit = Zibit = Yibit = \
+    B = kB = mB = gB = tB = pB = eB = zB = yB = \
+    KiB = MiB = GiB = TiB = PiB = EiB = ZiB = YiB = 0.
+
+# bit, kilobit, megabit, gigabit, terabit, exabit, petabit, zetabit, yottabit
+# bit, kibibit, mebibit, gibibit, tebibit, pebibit, exbibit, zebibit, yobibit
+# byte, kilobyte, megabyte, gigabyte, terabyte, petabyte, exabyte, zettabyte, yottabyte
+# byte, kibibyte, mebibyte, gibibyte, tebibyte, pebibyte, exbibyte, zebibyte, yobibyte
+
 
 ########################### Main code #######################################
 
@@ -73,7 +85,7 @@ def reset_units(seed=None):
     """
     import random
 
-    global m, kg, s, C, K
+    global m, kg, s, C, K, b
 
     if seed == 'SI':
         m = 1.
@@ -81,6 +93,7 @@ def reset_units(seed=None):
         s = 1.
         C = 1.
         K = 1.
+        b = 1.
     else:
         prior_random_state = random.getstate()
 
@@ -94,6 +107,7 @@ def reset_units(seed=None):
         s = 10. ** random.uniform(-1,1) #second
         C = 10. ** random.uniform(-1,1) # coulombs
         K = 10. ** random.uniform(-1,1) # kelvins
+        b = 10. ** random.uniform(-1,1) # bits
 
         # Leave the random generator like I found it, in case something else is
         # using it.
@@ -355,8 +369,54 @@ def set_derived_units_and_constants():
     uH = 1e-6 * H
     nH = 1e-9 * H
 
+    # Storage
+    global b, kb, mb, gb, tb, eb, pb, zb, yb, \
+    kbit, mbit, gbit, tbit, ebit, pbit, zbit, ybit, \
+    Kib, Mib, Gib, Tib, Pib, Eib, Zib, Yib, \
+    Kibit, Mibit, Gibit, Tibit, Pibit, Eibit, Zibit, Yibit, \
+    B, kB, mB, gB, tB, pB, eB, zB, yB, \
+    KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB
+    # kilobit
+    kb = kbit = 1e-3 * b
+    mb = mbit = 1e-6 * b
+    gb = gbit = 1e-9 * b
+    tb = tbit = 1e-12 * b
+    eb = ebit = 1e-15 * b
+    pb = pbit = 1e-18 * b
+    zb = zbit = 1e-21 * b
+    yb = ybit = 1e-24 * b
+    # kibibit
+    Kib = Kibit = pow(2,10) * b
+    Mib = Mibit = pow(2,20) * b 
+    Gib = Gibit = pow(2,30) * b 
+    Tib = Mibit = pow(2,40) * b 
+    Pib = Pibit = pow(2,50) * b 
+    Eib = Eibit = pow(2,60) * b 
+    Zib = Zibit = pow(2,70) * b 
+    Yib = Yibit = pow(2,80) * b 
+    # Byte
+    B = 8 * b
+    # kiloByte = kB
+    kB = 1e-3 * B
+    mB = 1e-6 * B
+    gB = 1e-9 * B
+    tB = 1e-12 * B
+    pB = 1e-15 * B
+    eB = 1e-18 * B
+    zB = 1e-21 * B
+    yB = 1e-24 * B
+    # kibiByte = KiB
+    KiB = pow(2,10) * B 
+    MiB = pow(2,20) * B 
+    GiB = pow(2,30) * B 
+    TiB = pow(2,40) * B 
+    PiB = pow(2,50) * B 
+    EiB = pow(2,60) * B 
+    ZiB = pow(2,70) * B 
+    YiB = pow(2,80) * B 
+
     #Constants--general
-    global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
+    global c0, mu0, eps0, Z0, hPlanck, hbar, kBoltzmann, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
     mu0 = 4. * pi * 1e-7 * N/A**2  #magnetic constant, permeability of vacuum
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
@@ -364,7 +424,7 @@ def set_derived_units_and_constants():
     hPlanck = 6.62606957e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
     globals()['ħ'] = hbar # shorter alias (only works in Python 3)
-    kB = 1.3806488e-23 * J/K  #Boltzmann constant
+    kBoltzmann = 1.3806488e-23 * J/K  #Boltzmann constant
     GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
     alphaFS = 7.2973525698e-3  #fine-structure constant
@@ -372,7 +432,7 @@ def set_derived_units_and_constants():
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
            ARichardson, Phi0, KJos, RKlitz
-    Rgas = kB #ideal gas constant (see README)
+    Rgas = kBoltzmann #ideal gas constant (see README)
     e = 1.602176565e-19 * C  #charge of proton
     uBohr = 9.27400968e-24 * J/T  #Bohr magneton
     uNuc = 5.05078353e-27 * J/T #nuclear magneton
@@ -382,7 +442,7 @@ def set_derived_units_and_constants():
     mn = 1.674927351e-27 * kg #neutron mass
     Rinf = 10973731.568539 / m #Rydberg constant
     Ry = 2.179872171e-18 * J  #Rydberg energy, approximately 13.6 eV
-    ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  #Richardson constant
+    ARichardson = (4.*pi*e*me*kBoltzmann**2) / hPlanck**3  #Richardson constant
     Phi0 = 2.067833758e-15 * Wb #magnetic flux quantum
     KJos = 4.83597870e14 * Hz / V #Josephson constant
     RKlitz = 2.58128074434e4 * ohm #von Klitzing constant
