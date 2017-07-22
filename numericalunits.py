@@ -44,7 +44,7 @@ ohm = mohm = kohm = Mohm = Gohm = S = mS = uS = nS = 0.
 T = mT = uT = nT = G = mG = uG = kG = Oe = Wb = 0.
 F = uF = nF = pF = fF = aF = H = mH = uH = nH = 0.
 c0 = mu0 = eps0 = Z0 = hPlanck = hbar = kB = GNewton = sigmaSB = alphaFS = 0.
-Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = \
+Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = Hartree = \
     ARichardson = Phi0 = KJos = RKlitz = 0.
 REarth = g0 = Msolar = MEarth = 0.
 
@@ -370,7 +370,7 @@ def set_derived_units_and_constants():
     alphaFS = 7.2973525698e-3  #fine-structure constant
 
     #Constants--chemistry, atomic physics, electrons
-    global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, \
+    global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
            ARichardson, Phi0, KJos, RKlitz
     Rgas = kB #ideal gas constant (see README)
     e = 1.602176565e-19 * C  #charge of proton
@@ -382,6 +382,7 @@ def set_derived_units_and_constants():
     mn = 1.674927351e-27 * kg #neutron mass
     Rinf = 10973731.568539 / m #Rydberg constant
     Ry = 2.179872171e-18 * J  #Rydberg energy, approximately 13.6 eV
+    Hartree = 2*Ry #Hartree energy, alternative atomic units
     ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  #Richardson constant
     Phi0 = 2.067833758e-15 * Wb #magnetic flux quantum
     KJos = 4.83597870e14 * Hz / V #Josephson constant
