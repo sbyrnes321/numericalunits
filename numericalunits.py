@@ -14,7 +14,7 @@ from __future__ import division
 
 from math import pi
 
-__version__ = 1.16
+__version__ = 1.17
 
 
 ########## Set all variables, to help introspection libraries ################
@@ -382,7 +382,7 @@ def set_derived_units_and_constants():
     mn = 1.674927351e-27 * kg #neutron mass
     Rinf = 10973731.568539 / m #Rydberg constant
     Ry = 2.179872171e-18 * J  #Rydberg energy, approximately 13.6 eV
-    Hartree = 2*Ry #Hartree energy, alternative atomic units
+    Hartree = 2*Ry #Hartree energy, approximately 27.2 eV
     ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  #Richardson constant
     Phi0 = 2.067833758e-15 * Wb #magnetic flux quantum
     KJos = 4.83597870e14 * Hz / V #Josephson constant
