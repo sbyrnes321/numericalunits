@@ -324,6 +324,11 @@ def set_derived_units_and_constants():
     kohm = 1e3 * ohm
     Mohm = 1e6 * ohm
     Gohm = 1e9 * ohm
+    globals()['Ω'] = ohm # shorter alias (only works in Python 3)
+    globals()['mΩ'] = mohm # shorter alias (only works in Python 3)
+    globals()['kΩ'] = kohm # shorter alias (only works in Python 3)
+    globals()['MΩ'] = Mohm # shorter alias (only works in Python 3)
+    globals()['GΩ'] = Gohm # shorter alias (only works in Python 3)
     S = 1./ohm #siemens
     mS = 1e-3 * S
     uS = 1e-6 * S
@@ -359,7 +364,9 @@ def set_derived_units_and_constants():
     global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
     mu0 = 4. * pi * 1e-7 * N/A**2  #magnetic constant, permeability of vacuum
+    globals()['μ0'] = mu0 # shorter alias (only works in Python 3)
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
+    globals()['ε0'] = eps0 # shorter alias (only works in Python 3)
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
     hPlanck = 6.62606957e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
@@ -367,7 +374,9 @@ def set_derived_units_and_constants():
     kB = 1.3806488e-23 * J/K  #Boltzmann constant
     GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
+    globals()['σSB'] = sigmaSB # shorter alias (only works in Python 3)
     alphaFS = 7.2973525698e-3  #fine-structure constant
+    globals()['αFS'] = alphaFS  # shorter alias (only works in Python 3)
 
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
