@@ -25,4 +25,7 @@ so that code completion libraries are more likely to find the unit names.
 
 version 1.17, 2017-07-22 -- add hartree energy, switch packaging from sdist to bdist_wheel
 
-version 1.18, 2017-11-11 -- add easier-to-read unicode aliases for ohms (Ω, mΩ, kΩ, etc.) and a few more constants (μ0, ε0, σSB, αFS). (note that unicode identifiers only work in Python 3)
+version 1.18, 2017-11-11 -- add easier-to-read unicode aliases for ohms (Ω, mΩ, kΩ, etc.)
+and a few more constants (μ0, ε0, σSB, αFS). (note that unicode identifiers only work in Python 3)
+
+version 1.19, 2017-11-12 -- no code change, just edited README.
