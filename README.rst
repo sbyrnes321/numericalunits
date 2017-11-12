@@ -151,7 +151,7 @@ Notes on implementation and use
   the variable definitions have been forgotten. Three examples: In Spyder, each "Console"
   tab is its own session. In Jupyter, make a new Python session by selecting
   "Restart kernel". From the command line, each time you type
-  `python blah.py`, you are opening a new Python session. 
+  ``python blah.py``, you are opening a new Python session. 
 
 * For little, self-contained calculations (a few lines that are all within a
   single module), it is possible to check the units without opening a new Python
