@@ -65,19 +65,6 @@ compilation---you can download ``numericalunits.py`` from `PyPI
 Usage and examples
 ==================
 
-At the top of the code you're working on, write::
-
-    import numericalunits as nu
-    nu.reset_units()
-
-Unit errors, like trying to add a length to a mass, will not *immediately*
-announce themselves as unit errors. Instead, you need to run the whole
-calculation (including the ``reset_units()`` part) twice. If you get the
-same final answers both times, then congratulations, all your calculations
-are almost guaranteed to pass dimensional analysis! If you get different
-answers every time you run, then you made a unit error! It is up to you to
-figure out where and what the error is.
-
 To assign a unit to a quantity, **multiply** by the unit, e.g.
 ``my_length = 100 * mm``. (In normal text you would write "100 mm", but
 unfortunately Python does not have "implied multiplication".)
@@ -86,48 +73,52 @@ To express a dimensionful quantity in a certain unit, **divide** by that unit,
 e.g. when you see ``my_length / cm``, you pronounce it "my_length expressed
 in cm".
 
+Unit errors, like trying to add a length to a mass, will not *immediately*
+announce themselves as unit errors. Instead, you need to run the whole
+calculation twice (in a new Python session each time). If you get the
+same final answers both times, then congratulations, all your calculations
+are almost guaranteed to pass dimensional analysis! If you get different
+answers every time you run, then you made a unit error! It is up to you to
+figure out where and what the error is.
+
 **Example 1:** What is 5 mL expressed in cubic nanometers?::
 
-    import numericalunits as nu
-    nu.reset_units()
-    x = 5 * nu.mL  # "Read: x is equal to 5 milliliters"
-    x / nu.nm**3   # "Read: x expressed in cubic nanometers is..." --> 5e21
+    from numericalunits import mL, nm
+    x = 5 * mL  # "Read: x is equal to 5 milliliters"
+    print(x / nm**3)   # "Read: x expressed in cubic nanometers is..." --> 5e21
 
 **Example 2:** An electron is in a 1e5 V/cm electric field. What is its
 acceleration? (Express the answer in m/s^2.) ::
 
-    import numericalunits as nu
-    nu.reset_units()
-    efield = 1e5 * (nu.V / nu.cm)
-    force = nu.e * efield # (nu.e is the elementary charge)
-    accel = force / nu.me # (nu.me is the electron mass)
-    accel / (nu.m / nu.s**2) # Answer --> 1.7588e18
+    from numericalunits import V, cm, e, me, m, s
+    Efield = 1e5 * (V / cm)
+    force = e * Efield # (e is the elementary charge)
+    accel = force / me # (me is the electron mass)
+    print(accel / (m / s**2)) # Answer --> 1.7588e18
 
 **Example 3:** You measured a voltage as a function of the position of dial: 
 10 volts when the dial is at 1cm, 11 volts when the dial is at 2cm, etc. 
 etc. Interpolate from this data to get the expected voltage when the dial is 
 at 41mm, and express the answer in mV. ::
 
-    import numericalunits as nu
-    nu.reset_units()
+    from numericalunits import cm, V, mm, mV
     from numpy import array
     from scipy.interpolate import interp1d
-    voltage_data = array([[1 * nu.cm, 10 * nu.V],
-                          [2 * nu.cm, 11 * nu.V],
-                          [3 * nu.cm, 13 * nu.V],
-                          [4 * nu.cm, 16 * nu.V],
-                          [5 * nu.cm, 18 * nu.V]])
+    voltage_data = array([[1 * cm, 10 * V],
+                          [2 * cm, 11 * V],
+                          [3 * cm, 13 * V],
+                          [4 * cm, 16 * V],
+                          [5 * cm, 18 * V]])
     f = interp1d(voltage_data[:,0], voltage_data[:,1])
-    f(41 * nu.mm) / nu.mV # Answer --> 16200
+    print(f(41 * mm) / mV) # Answer --> 16200
 	
 
 **Example 4:** A unit mistake ... what is 1 cm expressed in atmospheres? ::
 
-    import numericalunits as nu
-    nu.reset_units()
-    (1 * nu.cm) / nu.atm # --> a randomly-varying number
-    # The answer randomly varies every time you run this, indicating that you
-    # are violating dimensional analysis.
+    from numericalunits import cm, atm
+    print((1 * cm) / atm) # --> a randomly-varying number
+    # The answer randomly varies every time you run this (in a new Python
+    # session), indicating that you are violating dimensional analysis.
 
 How it works
 ============
@@ -155,30 +146,21 @@ Notes
 Notes on implementation and use
 -------------------------------
 
-* The units should not be reset in the *middle* of a calculation. They 
-  should be randomly chosen *once* at the beginning, then carried through 
-  consistently. My advice on how to do that:
-  
-  * **For little, self-contained calculations, follow the examples above.** Put
-    ``reset_units()`` at the beginning of the calculation, then check for
-    dimensional errors by re-running the whole calculation (including the
-    ``reset_units()`` part). Note that if you are using ``from``-style imports,
-    like ``from numericalunits import cm``, you need to put them *after*
-    ``reset_units()`` in the code.
+* **What does it mean to "run the calculation again in a new Python
+  session?"** You know that you've started a new Python session if all
+  the variable definitions have been forgotten. Three examples: In Spyder, each "Console"
+  tab is its own session. In Jupyter, make a new Python session by selecting
+  "Restart kernel". From the command line, each time you type
+  `python blah.py`, you are opening a new Python session. 
 
-  * **For more complicated calculations, don't use reset_units() at all.
-    Instead, check for dimensional errors by re-running the calculation in a new
-    Python session.** (By "complicated" I mainly mean "involving modules".)
-    
-    * (Why does this work? Because the first time ``numericalunits`` is imported
-      in a given Python session, ``reset_units()`` is run automatically. That
-      happens only once, so multiple modules can ``import numericalunits``, and
-      they will all share a random, but self-consistent, set of units.)
-    
-    * (If you want to check for dimensional errors but you really really don't
-      want to open a new Python session, you need to ``reset_units()`` *and*
-      reload every module that has dimensionful variables in its namespace. It's
-      not impossible, but it's annoying and error-prone.)
+* For little, self-contained calculations (a few lines that are all within a
+  single module), it is possible to check the units without opening a new Python
+  session: Run the function ``numericalunits.reset_units()`` at the beginning of
+  the calculation before any variables are defined; then check for
+  dimensional errors by re-running the whole calculation (including the
+  ``reset_units()`` part). Note that if you are using ``from``-style imports,
+  like ``from numericalunits import cm``, you need to put them *after*
+  ``reset_units()`` in the code.
 
 * While debugging a program, it may be annoying to have intermediate values 
   in the calculation that randomly vary every time you run the program. In 
@@ -187,7 +169,9 @@ Notes on implementation and use
   SI units: All times are in seconds, all lengths are in meters, all forces
   are in newtons, etc. Alternatively, ``reset_units(123)`` uses ``123`` as
   the seed for the random-number generator. Obviously, in these modes, you
-  will *not* get any indication of dimensional-analysis errors.
+  will *not* get any indication of dimensional-analysis errors. As above,
+  if you are going to use any version of ``reset_units()``, make sure you do
+  it before any dimensionful variable is defined in any module.
 
 * There are very rare, strange cases where the final answer does not seem to 
   randomly vary even though there was a dimensional-analysis violation: For 
@@ -208,10 +192,10 @@ Notes on implementation and use
   `github issue board <https://github.com/sbyrnes321/numericalunits/issues>`_.
 
 * If you get overflows or underflows, you can edit the unit initializations.
-  For example, the package sets the meter to a numerical value between 0.1
+  For example, the package sets the meter to a random numerical value between 0.1
   and 10. Therefore, if you're doing molecular simulation, most lengths you
   use will be tiny numbers. You should probably set the meter instead to be
-  between, say, 1e8 and 1e10.
+  between, say, a random numerical value between 1e8 and 1e10.
 
 * Some numerical routines use a default *absolute* tolerance, rather than
   relative tolerance, to decide convergence. This can cause the calculation
@@ -240,18 +224,17 @@ Notes on unit definitions
   on. (2) You should rarely need to use Avogadro's number ``NA`` -- it is just a
   synonym of ``mol`` (``NA = mol ~ 6e23``). Here are a few examples using moles: ::
   
-      import numericalunits as nu
-      nu.reset_units()
+      from numericalunits import um, uM, kcal, mol, fmol, J
       
       # There are eight copies of a protein inside a yeast nucleus of volume
       # 3 cubic microns. What is the concentration of the protein, in micromolar (uM)?
-      (8. / (3 * nu.um**3)) / nu.uM   # Answer --> 0.0044
+      print((8. / (3 * um**3)) / uM)   # Answer --> 0.0044
       
       # 5 kcal / mol is how many joules?
-      (5. * nu.kcal / nu.mol) / nu.J  # Answer --> 3.47e-20
+      print((5. * kcal / mol) / J)   # Answer --> 3.47e-20
       
       # How many molecules are in 2.3 femtomoles?
-      2.3 * nu.fmol  # Answer --> 1.39e9
+      print(2.3 * fmol)   # Answer --> 1.39e9
 
 * The package cannot convert temperatures between Fahrenheit, Celsius, and 
   kelvin. The reason is that these scales have different zeros, so the units 
