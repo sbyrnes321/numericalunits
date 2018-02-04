@@ -27,7 +27,7 @@ cm = mm = um = nm = pm = fm = km = angstrom = lightyear = \
     astro_unit = pc = kpc = Mpc = Gpc = inch = foot = mile = thou = 0.
 L = mL = uL = nL = pL = fL = aL = kL = ML = GL = 0.
 ms = us = ns = ps = fs = minute = hour = day = week = year = 0.
-Hz = mHz = kHz = MHz = GHz = THz = PHz = 0.
+Hz = mHz = kHz = MHz = GHz = THz = PHz = rtHz = 0.
 g = mg = ug = ng = pg = fg = tonne = amu = Da = kDa = lbm = 0.
 J = mJ = uJ = nJ = pJ = fJ = kJ = MJ = GJ = erg = eV = meV = keV = MeV = GeV = \
     TeV = btu = smallcal = kcal = Wh = kWh = 0.
@@ -159,7 +159,7 @@ def set_derived_units_and_constants():
     year = 365.256363004 * day #sidereal year
 
     # Frequency
-    global Hz, mHz, kHz, MHz, GHz, THz, PHz
+    global Hz, mHz, kHz, MHz, GHz, THz, PHz, rtHz
     Hz = 1./s
     mHz = 1e-3 * Hz
     kHz = 1e3 * Hz
@@ -167,6 +167,7 @@ def set_derived_units_and_constants():
     GHz = 1e9 * Hz
     THz = 1e12 * Hz
     PHz = 1e15 * Hz
+	rtHz = Hz**0.5 # "root Hertz"
     
     # Angular frequency units
     # Example: ω = 3 * kHz·2π means that ω is the angular frequency
