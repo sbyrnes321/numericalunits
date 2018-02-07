@@ -167,8 +167,8 @@ def set_derived_units_and_constants():
     GHz = 1e9 * Hz
     THz = 1e12 * Hz
     PHz = 1e15 * Hz
-	rtHz = Hz**0.5 # "root Hertz"
-	rpm = 1/minute # revolutions per minute
+    rtHz = Hz**0.5 # "root Hertz"
+    rpm = 1/minute # revolutions per minute
     
     # Angular frequency units
     # Example: ω = 3 * kHz·2π means that ω is the angular frequency
