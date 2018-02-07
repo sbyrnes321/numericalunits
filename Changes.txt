@@ -29,3 +29,5 @@ version 1.18, 2017-11-11 -- add easier-to-read unicode aliases for ohms (Ω, mΩ
 and a few more constants (μ0, ε0, σSB, αFS). (note that unicode identifiers only work in Python 3)
 
 version 1.19, 2017-11-12 -- no code change, just edited README.
+
+version 1.20, 2018-02-07 -- add rtHz, rpm, rpm·2π

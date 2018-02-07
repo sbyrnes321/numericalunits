@@ -14,7 +14,7 @@ from __future__ import division
 
 from math import pi
 
-__version__ = 1.19
+__version__ = 1.20
 
 
 ########## Set all variables, to help introspection libraries ################
