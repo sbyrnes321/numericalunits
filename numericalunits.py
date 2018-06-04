@@ -35,7 +35,8 @@ NA = mol = mmol = umol = nmol = pmol = fmol = M = mM = uM = nM = pM = fM = 0.
 N = mN = uN = nN = pN = fN = kN = MN = GN = dyn = lbf = 0.
 Pa = hPa = kPa = MPa = GPa = bar = mbar = cbar = dbar = kbar = Mbar = atm = \
     torr = mtorr = psi = 0.
-W = mW = uW = nW = pW = kW = MW = GW = TW = 0.
+W = mW = uW = nW = pW = kW = MW = GW = TW = horsepower_imperial = \
+    horsepower_metric = 0.
 degFinterval = degCinterval = mK = uK = nK = pK = 0.
 mC = uC = nC = Ah = mAh = 0.
 A = mA = uA = nA = pA = fA = 0.
@@ -169,7 +170,7 @@ def set_derived_units_and_constants():
     PHz = 1e15 * Hz
     rtHz = Hz**0.5 # "root Hertz"
     rpm = 1/minute # revolutions per minute
-    
+
     # Angular frequency units
     # Example: ω = 3 * kHz·2π means that ω is the angular frequency
     #   corresponding to a rotation whose *ordinary* frequency is 3 kHz.
@@ -272,7 +273,8 @@ def set_derived_units_and_constants():
     psi = lbf / inch**2
 
     # Power
-    global W, mW, uW, nW, pW, kW, MW, GW, TW
+    global W, mW, uW, nW, pW, kW, MW, GW, TW, \
+           horsepower_imperial, horsepower_metric
     W = J/s
     mW = 1e-3 * W
     uW = 1e-6 * W
@@ -282,6 +284,8 @@ def set_derived_units_and_constants():
     MW = 1e6 * W
     GW = 1e9 * W
     TW = 1e12 * W
+    horsepower_imperial = 33000 * foot * lbf / minute
+    horsepower_metric = (75 * kg) * (9.80665 * m/s**2) * (1 * m/s)
 
     # Temperature
     global degFinterval, degCinterval, mK, uK, nK, pK
