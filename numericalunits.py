@@ -193,7 +193,7 @@ def set_derived_units_and_constants():
     pg = 1e-12 * g
     fg = 1e-15 * g
     tonne = 1e3 * kg
-    amu = 1.660538921e-27 * kg #atomic mass unit
+    amu = 1.660539040e-27 * kg #atomic mass unit
     Da = amu #Dalton
     kDa = 1e3 * Da
     lbm = 0.45359237 * kg # pound mass (international avoirdupois pound)
@@ -211,13 +211,13 @@ def set_derived_units_and_constants():
     MJ = 1e6 * J
     GJ = 1e9 * J
     erg = 1e-7 * J
-    eV = 1.602176565e-19 * J
+    eV = 1.6021766208e-19 * J
     meV = 1e-3 * eV
     keV = 1e3 * eV
     MeV = 1e6 * eV
     GeV = 1e9 * eV
     TeV = 1e12 * eV
-    btu = 1055.056 * J  #British thermal unit
+    btu = 1055.06 * J  #British thermal unit
     smallcal = 4.184 * J #small calorie ("gram calorie")
     kcal = 4184. * J  #kilocalorie ("large Calorie", "dietary Calorie")
     Wh = 3600. * J #watt-hour
@@ -225,7 +225,7 @@ def set_derived_units_and_constants():
 
     # Moles, concentration / molarity
     global NA, mol, mmol, umol, nmol, pmol, fmol, M, mM, uM, nM, pM, fM
-    NA = 6.02214129e23  #Avogadro's number
+    NA = 6.022140857e23  #Avogadro's number
     mol = NA  #1 mole (see README)
     mmol = 1e-3 * mol
     umol = 1e-6 * mol
@@ -251,7 +251,7 @@ def set_derived_units_and_constants():
     MN = 1e6 * N
     GN = 1e9 * N
     dyn = 1e-5 * N #dyne
-    lbf = 4.4482216152605 * N #pound-force (international avoirdupois pound)
+    lbf = lbm * (9.80665 * m/s**2) #pound-force (international avoirdupois pound)
 
     # Pressure
     global Pa, hPa, kPa, MPa, GPa, bar, mbar, cbar, dbar, kbar, Mbar, atm, \
@@ -375,41 +375,41 @@ def set_derived_units_and_constants():
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
     globals()['ε0'] = eps0 # shorter alias (only works in Python 3)
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
-    hPlanck = 6.62606957e-34 * J*s  #planck constant
+    hPlanck = 6.626070040e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
     globals()['ħ'] = hbar # shorter alias (only works in Python 3)
-    kB = 1.3806488e-23 * J/K  #Boltzmann constant
-    GNewton = 6.67384e-11 * m**3 / (kg * s**2) #Gravitational constant
-    sigmaSB = 5.670373e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
+    kB = 1.38064852e-23 * J/K  #Boltzmann constant
+    GNewton = 6.67408e-11 * m**3 / (kg * s**2) #Gravitational constant
+    sigmaSB = 5.670367e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
     globals()['σSB'] = sigmaSB # shorter alias (only works in Python 3)
-    alphaFS = 7.2973525698e-3  #fine-structure constant
+    alphaFS = 7.2973525664e-3  #fine-structure constant
     globals()['αFS'] = alphaFS  # shorter alias (only works in Python 3)
 
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
            ARichardson, Phi0, KJos, RKlitz
     Rgas = kB #ideal gas constant (see README)
-    e = 1.602176565e-19 * C  #charge of proton
-    uBohr = 9.27400968e-24 * J/T  #Bohr magneton
-    uNuc = 5.05078353e-27 * J/T #nuclear magneton
-    aBohr = 0.52917721092e-10 * m  #Bohr radius
-    me = 9.10938291e-31 * kg  #electron mass
-    mp = 1.672621777e-27 * kg #proton mass
-    mn = 1.674927351e-27 * kg #neutron mass
-    Rinf = 10973731.568539 / m #Rydberg constant
-    Ry = 2.179872171e-18 * J  #Rydberg energy, approximately 13.6 eV
+    e = 1.6021766208e-19 * C  #charge of proton
+    uBohr = 927.4009994e-26 * J/T  #Bohr magneton
+    uNuc = 5.050783699e-27 * J/T #nuclear magneton
+    aBohr = 0.52917721067e-10 * m  #Bohr radius
+    me = 9.10938356e-31 * kg  #electron mass
+    mp = 1.672621898e-27 * kg #proton mass
+    mn = 1.674927471e-27 * kg #neutron mass
+    Rinf = 10973731.568508 / m #Rydberg constant
+    Ry = 2.179872325e-18 * J  #Rydberg energy, approximately 13.6 eV
     Hartree = 2*Ry #Hartree energy, approximately 27.2 eV
     ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  #Richardson constant
-    Phi0 = 2.067833758e-15 * Wb #magnetic flux quantum
-    KJos = 4.83597870e14 * Hz / V #Josephson constant
-    RKlitz = 2.58128074434e4 * ohm #von Klitzing constant
+    Phi0 = 2.067833831e-15 * Wb #magnetic flux quantum
+    KJos = 483597.8525e9 * Hz / V #Josephson constant
+    RKlitz = 25812.8074555 * ohm #von Klitzing constant
 
     #Constants--astronomical and properties of earth
     global REarth, g0, Msolar, MEarth
     REarth = 6371. * km #radius of earth
     g0 = 9.80665 * m / s**2 #standard earth gravitational acceleration
-    Msolar = 1.98892e30 * kg #mass of the sun
-    MEarth = 5.9736e24 * kg #mass of earth
+    Msolar = 1.98847e30 * kg #mass of the sun
+    MEarth = 5.9722e24 * kg #mass of earth
 
 # Set units randomly when this module is initialized. (Don't worry: If the
 # module is imported many times from many places, this command will only
