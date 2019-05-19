@@ -90,11 +90,11 @@ def reset_units(seed=None):
         else:
             random.seed(seed)
 
-        m = 10. ** random.uniform(-1,1) #meter
-        kg = 10. ** random.uniform(-1,1) #kilogram
-        s = 10. ** random.uniform(-1,1) #second
-        C = 10. ** random.uniform(-1,1) # coulombs
-        K = 10. ** random.uniform(-1,1) # kelvins
+        m = 10. ** random.uniform(-2,2) #meter
+        kg = 10. ** random.uniform(-2,2) #kilogram
+        s = 10. ** random.uniform(-2,2) #second
+        C = 10. ** random.uniform(-2,2) # coulombs
+        K = 10. ** random.uniform(-2,2) # kelvins
 
         # Leave the random generator like I found it, in case something else is
         # using it.
