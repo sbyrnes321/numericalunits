@@ -211,7 +211,7 @@ def set_derived_units_and_constants():
     MJ = 1e6 * J
     GJ = 1e9 * J
     erg = 1e-7 * J
-    eV = 1.6021766208e-19 * J
+    eV = 1.602176634e-19 * J
     meV = 1e-3 * eV
     keV = 1e3 * eV
     MeV = 1e6 * eV
@@ -225,7 +225,7 @@ def set_derived_units_and_constants():
 
     # Moles, concentration / molarity
     global NA, mol, mmol, umol, nmol, pmol, fmol, M, mM, uM, nM, pM, fM
-    NA = 6.022140857e23  #Avogadro's number
+    NA = 6.02214076e23  #Avogadro's number
     mol = NA  #1 mole (see README)
     mmol = 1e-3 * mol
     umol = 1e-6 * mol
@@ -370,39 +370,39 @@ def set_derived_units_and_constants():
     #Constants--general
     global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
     c0 = 299792458. * m/s  #speed of light in vacuum
-    mu0 = 4. * pi * 1e-7 * N/A**2  #magnetic constant, permeability of vacuum
+    mu0 = 1.25663706212e-6 * N/A**2  #magnetic constant, permeability of vacuum
     globals()['μ0'] = mu0 # shorter alias (only works in Python 3)
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
     globals()['ε0'] = eps0 # shorter alias (only works in Python 3)
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
-    hPlanck = 6.626070040e-34 * J*s  #planck constant
+    hPlanck = 6.62607015e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
     globals()['ħ'] = hbar # shorter alias (only works in Python 3)
-    kB = 1.38064852e-23 * J/K  #Boltzmann constant
-    GNewton = 6.67408e-11 * m**3 / (kg * s**2) #Gravitational constant
-    sigmaSB = 5.670367e-8 * W / (m**2 * K**4)  #Stefan-Boltzmann constant
+    kB = 1.380649e-23 * J/K  #Boltzmann constant
+    GNewton = 6.67430e-11 * m**3 / (kg * s**2) #Gravitational constant
+    sigmaSB = (pi**2 / 60.) * kB**4 / (hbar**3 * c0**2)  #Stefan-Boltzmann constant
     globals()['σSB'] = sigmaSB # shorter alias (only works in Python 3)
-    alphaFS = 7.2973525664e-3  #fine-structure constant
+    alphaFS = 7.2973525693e-3  #fine-structure constant
     globals()['αFS'] = alphaFS  # shorter alias (only works in Python 3)
 
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
            ARichardson, Phi0, KJos, RKlitz
     Rgas = kB #ideal gas constant (see README)
-    e = 1.6021766208e-19 * C  #charge of proton
-    uBohr = 927.4009994e-26 * J/T  #Bohr magneton
-    uNuc = 5.050783699e-27 * J/T #nuclear magneton
-    aBohr = 0.52917721067e-10 * m  #Bohr radius
-    me = 9.10938356e-31 * kg  #electron mass
-    mp = 1.672621898e-27 * kg #proton mass
-    mn = 1.674927471e-27 * kg #neutron mass
-    Rinf = 10973731.568508 / m #Rydberg constant
-    Ry = 2.179872325e-18 * J  #Rydberg energy, approximately 13.6 eV
+    e = 1.602176634e-19 * C  #charge of proton
+    uBohr = 9.2740100783e-24 * J/T  #Bohr magneton
+    uNuc = 5.0507837461e-27 * J/T #nuclear magneton
+    aBohr = 5.29177210903e-11 * m  #Bohr radius
+    me = 9.1093837015e-31 * kg  #electron mass
+    mp = 1.67262192369e-27 * kg #proton mass
+    mn = 1.67492749804e-27 * kg #neutron mass
+    Rinf = 10973731.568160 / m #Rydberg constant
+    Ry = 2.1798723611035e-18 * J  #Rydberg energy, approximately 13.6 eV
     Hartree = 2*Ry #Hartree energy, approximately 27.2 eV
     ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  #Richardson constant
-    Phi0 = 2.067833831e-15 * Wb #magnetic flux quantum
-    KJos = 483597.8525e9 * Hz / V #Josephson constant
-    RKlitz = 25812.8074555 * ohm #von Klitzing constant
+    Phi0 = hPlanck / (2*e) #magnetic flux quantum
+    KJos = (2*e) / hPlanck #Josephson constant
+    RKlitz = hPlanck / e**2 #von Klitzing constant
 
     #Constants--astronomical and properties of earth
     global REarth, g0, Msolar, MEarth
