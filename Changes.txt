@@ -34,3 +34,7 @@ version 1.21, 2018-02-07 -- add rtHz, rpm, rpm·2π
 
 version 1.22, 2018-11-04 -- add horsepower_imperial and horsepower_metric, update all values to
 CODATA as of July 2018.
+
+version 1.23, 2019-05-23 -- add a smoke test; drop support except 2.7+ and 3.4+ (still probably
+works for older versions but I'm not promising); random initializations now span more orders of
+magnitude; update to latest CODATA.
