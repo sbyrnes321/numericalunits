@@ -103,7 +103,6 @@ def reset_units(seed=None):
         random.setstate(prior_random_state)
 
     set_derived_units_and_constants()
-    return
 
 def set_derived_units_and_constants():
     """
