@@ -195,7 +195,7 @@ def set_derived_units_and_constants():
     pg = 1e-12 * g
     fg = 1e-15 * g
     tonne = 1e3 * kg
-    amu = 1.660539040e-27 * kg #atomic mass unit
+    amu = 1.66053906660e-27 * kg #atomic mass unit
     Da = amu #Dalton
     kDa = 1e3 * Da
     lbm = 0.45359237 * kg # pound mass (international avoirdupois pound)
