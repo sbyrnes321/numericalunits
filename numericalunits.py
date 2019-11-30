@@ -38,6 +38,7 @@ Pa = hPa = kPa = MPa = GPa = bar = mbar = cbar = dbar = kbar = Mbar = atm = \
     torr = mtorr = psi = 0.
 W = mW = uW = nW = pW = kW = MW = GW = TW = horsepower_imperial = \
     horsepower_metric = 0.
+Gal = mGal = uGal = eotvos = 0.
 degFinterval = degCinterval = mK = uK = nK = pK = 0.
 mC = uC = nC = Ah = mAh = 0.
 A = mA = uA = nA = pA = fA = 0.
@@ -287,6 +288,13 @@ def set_derived_units_and_constants():
     TW = 1e12 * W
     horsepower_imperial = 33000 * foot * lbf / minute
     horsepower_metric = (75 * kg) * (9.80665 * m/s**2) * (1 * m/s)
+
+    # Acceleration and related
+    global Gal, mGal, uGal, eotvos
+    Gal = 1*cm/s**2
+    mGal = 1e-3 * Gal
+    uGal = 1e-6 * Gal
+    eotvos = 1e-9 / s**2
 
     # Temperature
     global degFinterval, degCinterval, mK, uK, nK, pK
