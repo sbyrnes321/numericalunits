@@ -23,11 +23,12 @@ __version__ = 1.23
 # values are set below, using the "global" keyword inside functions.
 
 m = kg = s = C = K = 0.
-cm = mm = um = nm = pm = fm = km = angstrom = lightyear = \
+cm = mm = um = nm = pm = fm = km = angstrom = Å = lightyear = \
     astro_unit = pc = kpc = Mpc = Gpc = inch = foot = mile = thou = 0.
 L = mL = uL = nL = pL = fL = aL = kL = ML = GL = 0.
 ms = us = ns = ps = fs = minute = hour = day = week = year = 0.
 Hz = mHz = kHz = MHz = GHz = THz = PHz = rtHz = rpm = 0.
+Hz·2π = mHz·2π = kHz·2π = MHz·2π = GHz·2π = THz·2π = PHz·2π = rpm·2π = 0.
 g = mg = ug = ng = pg = fg = tonne = amu = Da = kDa = lbm = 0.
 J = mJ = uJ = nJ = pJ = fJ = kJ = MJ = GJ = erg = eV = meV = keV = MeV = GeV = \
     TeV = btu = smallcal = kcal = Wh = kWh = 0.
@@ -41,10 +42,11 @@ degFinterval = degCinterval = mK = uK = nK = pK = 0.
 mC = uC = nC = Ah = mAh = 0.
 A = mA = uA = nA = pA = fA = 0.
 V = mV = uV = nV = kV = MV = GV = TV = 0.
-ohm = mohm = kohm = Mohm = Gohm = S = mS = uS = nS = 0.
+ohm = mohm = kohm = Mohm = Gohm = Ω = mΩ = kΩ = MΩ = GΩ = S = mS = uS = nS = 0.
 T = mT = uT = nT = G = mG = uG = kG = Oe = Wb = 0.
 F = uF = nF = pF = fF = aF = H = mH = uH = nH = 0.
-c0 = mu0 = eps0 = Z0 = hPlanck = hbar = kB = GNewton = sigmaSB = alphaFS = 0.
+c0 = mu0 = μ0 = eps0 = ε0 = Z0 = hPlanck = hbar = ħ = kB = GNewton = sigmaSB = \
+    σSB = alphaFS = αFS = 0.
 Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = Hartree = \
     ARichardson = Phi0 = KJos = RKlitz = 0.
 REarth = g0 = Msolar = MEarth = 0.
@@ -111,7 +113,7 @@ def set_derived_units_and_constants():
     """
 
     # Length
-    global cm, mm, um, nm, pm, fm, km, angstrom, lightyear, \
+    global cm, mm, um, nm, pm, fm, km, angstrom, Å, lightyear, \
         astro_unit, pc, kpc, Mpc, Gpc, inch, foot, mile, thou
     cm = 1e-2 * m
     mm = 1e-3 * m
@@ -121,7 +123,7 @@ def set_derived_units_and_constants():
     fm = 1e-15 * m
     km = 1e3 * m
     angstrom = 1e-10 * m
-    globals()['Å'] = angstrom # shorter alias (only works in Python 3)
+    Å = angstrom # easier-to-read alias (see https://sjbyrnes.com/unicode.html )
     lightyear = 9460730472580800. * m
     astro_unit = 149597870700. * m #astronomical unit
     pc = (648000./pi) * astro_unit #parsec
@@ -171,18 +173,18 @@ def set_derived_units_and_constants():
     rtHz = Hz**0.5 # "root Hertz"
     rpm = 1/minute # revolutions per minute
 
-    # Angular frequency units
+    # Angular frequency
     # Example: ω = 3 * kHz·2π means that ω is the angular frequency
     #   corresponding to a rotation whose *ordinary* frequency is 3 kHz.
-    # Note: These only work in Python 3.
-    globals()['Hz·2π']  =  Hz * 2*pi
-    globals()['mHz·2π'] = mHz * 2*pi
-    globals()['kHz·2π'] = kHz * 2*pi
-    globals()['MHz·2π'] = MHz * 2*pi
-    globals()['GHz·2π'] = GHz * 2*pi
-    globals()['THz·2π'] = THz * 2*pi
-    globals()['PHz·2π'] = PHz * 2*pi
-    globals()['rpm·2π'] = rpm * 2*pi
+    global Hz·2π, mHz·2π, kHz·2π, MHz·2π, GHz·2π, THz·2π, PHz·2π, rpm·2π
+    Hz·2π  =  Hz * 2*pi
+    mHz·2π = mHz * 2*pi
+    kHz·2π = kHz * 2*pi
+    MHz·2π = MHz * 2*pi
+    GHz·2π = GHz * 2*pi
+    THz·2π = THz * 2*pi
+    PHz·2π = PHz * 2*pi
+    rpm·2π = rpm * 2*pi
 
     # Mass
     global g, mg, ug, ng, pg, fg, tonne, amu, Da, kDa, lbm
@@ -325,17 +327,17 @@ def set_derived_units_and_constants():
     TV = 1e12 * V
 
     # Resistance and conductivity
-    global ohm, mohm, kohm, Mohm, Gohm, S, mS, uS, nS
+    global ohm, mohm, kohm, Mohm, Gohm, Ω, mΩ, kΩ, MΩ, GΩ, S, mS, uS, nS
     ohm = V / A
     mohm = 1e-3 * ohm
     kohm = 1e3 * ohm
     Mohm = 1e6 * ohm
     Gohm = 1e9 * ohm
-    globals()['Ω'] = ohm # shorter alias (only works in Python 3)
-    globals()['mΩ'] = mohm # shorter alias (only works in Python 3)
-    globals()['kΩ'] = kohm # shorter alias (only works in Python 3)
-    globals()['MΩ'] = Mohm # shorter alias (only works in Python 3)
-    globals()['GΩ'] = Gohm # shorter alias (only works in Python 3)
+    Ω = ohm # easier-to-read alias (see https://sjbyrnes.com/unicode.html )
+    mΩ = mohm # easier-to-read alias
+    kΩ = kohm # easier-to-read alias
+    MΩ = Mohm # easier-to-read alias
+    GΩ = Gohm # easier-to-read alias
     S = 1./ohm #siemens
     mS = 1e-3 * S
     uS = 1e-6 * S
@@ -368,22 +370,22 @@ def set_derived_units_and_constants():
     nH = 1e-9 * H
 
     #Constants--general
-    global c0, mu0, eps0, Z0, hPlanck, hbar, kB, GNewton, sigmaSB, alphaFS
+    global c0, mu0, μ0, eps0, ε0, Z0, hPlanck, hbar, ħ, kB, GNewton, sigmaSB, σSB, alphaFS, αFS
     c0 = 299792458. * m/s  #speed of light in vacuum
     mu0 = 1.25663706212e-6 * N/A**2  #magnetic constant, permeability of vacuum
-    globals()['μ0'] = mu0 # shorter alias (only works in Python 3)
+    μ0 = mu0 # easier-to-read alias (see https://sjbyrnes.com/unicode.html )
     eps0 = 1./(mu0 * c0**2) #electric constant, permittivity of vacuum
-    globals()['ε0'] = eps0 # shorter alias (only works in Python 3)
+    ε0 = eps0 # easier-to-read alias
     Z0 = mu0 * c0  #vacuum impedance, 377 ohms
     hPlanck = 6.62607015e-34 * J*s  #planck constant
     hbar = hPlanck / (2.*pi)  #reduced planck constant
-    globals()['ħ'] = hbar # shorter alias (only works in Python 3)
+    ħ = hbar # easier-to-read alias
     kB = 1.380649e-23 * J/K  #Boltzmann constant
     GNewton = 6.67430e-11 * m**3 / (kg * s**2) #Gravitational constant
     sigmaSB = (pi**2 / 60.) * kB**4 / (hbar**3 * c0**2)  #Stefan-Boltzmann constant
-    globals()['σSB'] = sigmaSB # shorter alias (only works in Python 3)
+    σSB = sigmaSB # easier-to-read alias
     alphaFS = 7.2973525693e-3  #fine-structure constant
-    globals()['αFS'] = alphaFS  # shorter alias (only works in Python 3)
+    αFS = alphaFS  # easier-to-read alias
 
     #Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
