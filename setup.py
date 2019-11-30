@@ -17,7 +17,7 @@ descrip = ("A package that lets you define quantities with units, which can "
 setup(
     name = "numericalunits",
     version = __version__,
-    author = "Steven Byrnes",
+    author = "Steven J. Byrnes",
     author_email = "steven.byrnes@gmail.com",
     description = descrip,
     license = "MIT",
@@ -31,6 +31,5 @@ setup(
         "Topic :: Scientific/Engineering",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.4"]
 )
