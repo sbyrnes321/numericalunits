@@ -187,8 +187,10 @@ Notes on implementation and use
 * You can give a dimension to complex numbers in the same way as real 
   numbers--for example ``(2.1e3 + 3.9e4j) * ohm``.
 
-* Should be compatible with any Python version 2.x or 3.x. If you find bugs,
-  please tell me by `email <http://sjbyrnes.com>`_ or 
+* Requires Python 3. (For Python 2 compatibility, install numericalunits
+  version 1.23 or earlier.)
+
+* If you find bugs, please tell me by `email <http://sjbyrnes.com>`_ or 
   `github issue board <https://github.com/sbyrnes321/numericalunits/issues>`_.
 
 * If you get overflows or underflows, you can edit the unit initializations.
