@@ -88,7 +88,7 @@ figure out where and what the error is.
     print(x / nm**3)   # "Read: x expressed in cubic nanometers is..." --> 5e21
 
 **Example 2:** An electron is in a 1e5 V/cm electric field. What is its
-acceleration? (Express the answer in m/s^2.) ::
+acceleration? (Express the answer in m/s².) ::
 
     from numericalunits import V, cm, e, me, m, s
     Efield = 1e5 * (V / cm)
@@ -230,10 +230,10 @@ Notes on unit definitions
       
       # There are eight copies of a protein inside a yeast nucleus of volume
       # 3 cubic microns. What is the concentration of the protein, in micromolar (uM)?
-      print((8. / (3 * um**3)) / uM)   # Answer --> 0.0044
+      print((8 / (3 * um**3)) / uM)   # Answer --> 0.0044
       
       # 5 kcal / mol is how many joules?
-      print((5. * kcal / mol) / J)   # Answer --> 3.47e-20
+      print((5 * kcal / mol) / J)   # Answer --> 3.47e-20
       
       # How many molecules are in 2.3 femtomoles?
       print(2.3 * fmol)   # Answer --> 1.39e9
