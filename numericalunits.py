@@ -53,6 +53,36 @@ REarth = g0 = Msolar = MEarth = 0.
 ########################### Main code #######################################
 
 
+def eval(expression):
+    """
+    Evaluates a unit expression.
+    Adapted from https://stackoverflow.com/a/9558001
+
+    Args:
+        expression (str): an expression to evaluate, such as 'kg * m / s ** 2'.
+
+    Returns:
+        The result of the expression as a float.
+    """
+    import ast
+    import operator as op
+    operators = {ast.Mult: op.mul, ast.Div: op.truediv, ast.Pow: op.pow, ast.USub: op.neg}
+
+    def _eval(node):
+        if isinstance(node, ast.Num):
+            return node.n
+        elif isinstance(node, ast.BinOp):  # <left> <operator> <right>
+            return operators[type(node.op)](_eval(node.left), _eval(node.right))
+        elif isinstance(node, ast.UnaryOp):  # <operator> <operand> e.g., -1
+            return operators[type(node.op)](_eval(node.operand))
+        elif isinstance(node, ast.Name):
+            return globals()[node.id]
+        else:
+            raise TypeError(node)
+
+    return _eval(ast.parse(expression, mode='eval').body)
+
+
 def reset_units(seed=None):
     """
     Set all units to new, self-consistent, floating-point values. See package
