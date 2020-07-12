@@ -422,3 +422,41 @@ def set_derived_units_and_constants():
 # module is imported many times from many places, this command will only
 # execute during the first import.)
 reset_units()
+
+def nu_eval(expression):
+    """
+    Evaluates a string expression in the context of this module, so that you
+    can make APIs that don't require their users to import numericalunits;
+    instead the API user can run a function like load_data(data, unit='km')
+
+    For example:
+
+        import numericalunits as nu
+        x = nu.nu_eval('kg * m / s**2')
+
+    ...is exactly equivalent to...
+
+        import numericalunits as nu
+        x = nu.kg * nu.m / nu.s**2
+
+    Input strings are required to be of the form of stereotypical unit
+    expressions—e.g. addition and subtraction are banned—to catch user errors.
+    """
+    # Based on https://stackoverflow.com/a/9558001
+    import ast
+    import operator as op
+    operators = {ast.Mult: op.mul, ast.Div: op.truediv, ast.Pow: op.pow, ast.USub: op.neg}
+
+    def _eval(node):
+        if isinstance(node, ast.Num):
+            return node.n
+        elif isinstance(node, ast.BinOp):  # <left> <operator> <right>
+            return operators[type(node.op)](_eval(node.left), _eval(node.right))
+        elif isinstance(node, ast.UnaryOp):  # <operator> <operand> e.g., -1
+            return operators[type(node.op)](_eval(node.operand))
+        elif isinstance(node, ast.Name):
+            return globals()[node.id]
+        else:
+            raise TypeError(node)
+
+    return _eval(ast.parse(expression, mode='eval').body)
