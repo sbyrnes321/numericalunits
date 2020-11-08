@@ -12,7 +12,7 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 
 from math import pi
 
-__version__ = 1.24
+__version__ = 1.25
 
 
 ########## Set all variables, to help introspection libraries ################
