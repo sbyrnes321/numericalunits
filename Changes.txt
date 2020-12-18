@@ -41,3 +41,5 @@ magnitude; update to latest CODATA.
 
 version 1.24, 2019-11-29 -- drop support for python 2; update to latest CODATA; add more
 acceleration-related units.
+
+version 1.25, 2020-11-07 -- add nu_eval() function.
