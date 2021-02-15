@@ -173,6 +173,12 @@ Notes on implementation and use
   if you are going to use any version of ``reset_units()``, make sure you do
   it before any dimensionful variable is defined in any module.
 
+* If you have a quantity you want to plot, store, pass between different
+  parallel processes, etc., make sure you first express it in a known unit.
+  (e.g. "energy expressed in joules" can be passed between processses, but
+  "energy" cannot.) For parallel processing in particular, see `README appendix <https://github.com/sbyrnes321/numericalunits/blob/master/README_appendix.rst>`_
+  for different ways of using the package, with example code.
+
 * There are very rare, strange cases where the final answer does not seem to 
   randomly vary even though there was a dimensional-analysis violation: For 
   example, the expression ``(1 + 1e-50 * cm / atm)`` fails dimensional 
