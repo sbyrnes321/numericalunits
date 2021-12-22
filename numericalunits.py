@@ -47,7 +47,7 @@ F = uF = nF = pF = fF = aF = H = mH = uH = nH = 0.
 c0 = mu0 = μ0 = eps0 = ε0 = Z0 = hPlanck = hbar = ħ = kB = GNewton = sigmaSB = \
     σSB = alphaFS = αFS = 0.
 Rgas = e = uBohr = uNuc = aBohr = me = mp = mn = Rinf = Ry = Hartree = \
-    ARichardson = Phi0 = KJos = RKlitz = 0.
+    ARichardson = Phi0 = KJos = RKlitz = debye = 0.
 REarth = g0 = Msolar = MEarth = 0.
 
 ########################### Main code #######################################
@@ -394,7 +394,7 @@ def set_derived_units_and_constants():
 
     # Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
-           ARichardson, Phi0, KJos, RKlitz
+           ARichardson, Phi0, KJos, RKlitz, debye
     Rgas = kB # ideal gas constant (see README)
     e = 1.602176634e-19 * C  # charge of proton
     uBohr = 9.2740100783e-24 * J/T  # Bohr magneton
@@ -410,6 +410,7 @@ def set_derived_units_and_constants():
     Phi0 = hPlanck / (2*e) # magnetic flux quantum
     KJos = (2*e) / hPlanck # Josephson constant
     RKlitz = hPlanck / e**2 # von Klitzing constant
+    debye = 1e-21*C*m**2/(s*c0) # debye dipole moment, approximately 0.0208 e nm
 
     # Constants--astronomical and properties of earth
     global REarth, g0, Msolar, MEarth
