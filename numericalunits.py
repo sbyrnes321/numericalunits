@@ -2,7 +2,7 @@
 """
 For information and usage see README, or http://pypi.python.org/pypi/numericalunits
 """
-# Copyright (C) 2012-2020 Steven J. Byrnes
+# Copyright (C) 2012-2024 Steven J. Byrnes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
@@ -193,7 +193,7 @@ def set_derived_units_and_constants():
     pg = 1e-12 * g
     fg = 1e-15 * g
     tonne = 1e3 * kg
-    amu = 1.66053906660e-27 * kg # atomic mass unit
+    amu = 1.66053906892e-27 * kg # atomic mass unit - https://physics.nist.gov/cgi-bin/cuu/Value?u
     Da = amu # Dalton
     kDa = 1e3 * Da
     lbm = 0.45359237 * kg # pound mass (international avoirdupois pound)
@@ -211,7 +211,7 @@ def set_derived_units_and_constants():
     MJ = 1e6 * J
     GJ = 1e9 * J
     erg = 1e-7 * J
-    eV = 1.602176634e-19 * J
+    eV = 1.602176634e-19 * J # https://physics.nist.gov/cgi-bin/cuu/Value?e
     meV = 1e-3 * eV
     keV = 1e3 * eV
     MeV = 1e6 * eV
@@ -225,8 +225,8 @@ def set_derived_units_and_constants():
 
     # Moles, concentration / molarity
     global NA, mol, mmol, umol, nmol, pmol, fmol, M, mM, uM, nM, pM, fM
-    NA = 6.02214076e23  # Avogadro's number
-    mol = NA  #1 mole (see README)
+    NA = 6.02214076e23  # Avogadro's number - https://physics.nist.gov/cgi-bin/cuu/Value?na
+    mol = NA  # 1 mole (see README)
     mmol = 1e-3 * mol
     umol = 1e-6 * mol
     nmol = 1e-9 * mol
@@ -376,41 +376,41 @@ def set_derived_units_and_constants():
 
     # Constants--general
     global c0, mu0, μ0, eps0, ε0, Z0, hPlanck, hbar, ħ, kB, GNewton, sigmaSB, σSB, alphaFS, αFS
-    c0 = 299792458. * m/s  # speed of light in vacuum
-    mu0 = 1.25663706212e-6 * N/A**2  # magnetic constant, permeability of vacuum
+    c0 = 299792458. * m/s  # speed of light in vacuum - https://physics.nist.gov/cgi-bin/cuu/Value?c
+    mu0 = 1.25663706127e-6 * N/A**2  # magnetic constant, permeability of vacuum - https://physics.nist.gov/cgi-bin/cuu/Value?mu0
     μ0 = mu0 # easier-to-read alias (see https://sjbyrnes.com/unicode.html )
     eps0 = 1./(mu0 * c0**2) # electric constant, permittivity of vacuum
     ε0 = eps0 # easier-to-read alias
     Z0 = mu0 * c0  # vacuum impedance, 377 ohms
-    hPlanck = 6.62607015e-34 * J*s  # planck constant
+    hPlanck = 6.62607015e-34 * J*s  # planck constant - https://physics.nist.gov/cgi-bin/cuu/Value?h
     hbar = hPlanck / (2.*pi)  # reduced planck constant
     ħ = hbar # easier-to-read alias
-    kB = 1.380649e-23 * J/K  # Boltzmann constant
-    GNewton = 6.67430e-11 * m**3 / (kg * s**2) # Gravitational constant
+    kB = 1.380649e-23 * J/K  # Boltzmann constant - https://physics.nist.gov/cgi-bin/cuu/Value?k
+    GNewton = 6.67430e-11 * m**3 / (kg * s**2) # Gravitational constant - https://physics.nist.gov/cgi-bin/cuu/Value?bg
     sigmaSB = (pi**2 / 60.) * kB**4 / (hbar**3 * c0**2)  # Stefan-Boltzmann constant
     σSB = sigmaSB # easier-to-read alias
-    alphaFS = 7.2973525693e-3  # fine-structure constant
+    alphaFS = 7.2973525643e-3  # fine-structure constant - https://physics.nist.gov/cgi-bin/cuu/Value?alph
     αFS = alphaFS  # easier-to-read alias
 
     # Constants--chemistry, atomic physics, electrons
     global Rgas, e, uBohr, uNuc, aBohr, me, mp, mn, Rinf, Ry, Hartree, \
            ARichardson, Phi0, KJos, RKlitz, debye
     Rgas = kB # ideal gas constant (see README)
-    e = 1.602176634e-19 * C  # charge of proton
-    uBohr = 9.2740100783e-24 * J/T  # Bohr magneton
-    uNuc = 5.0507837461e-27 * J/T # nuclear magneton
-    aBohr = 5.29177210903e-11 * m  # Bohr radius
-    me = 9.1093837015e-31 * kg  # electron mass
-    mp = 1.67262192369e-27 * kg # proton mass
-    mn = 1.67492749804e-27 * kg # neutron mass
-    Rinf = 10973731.568160 / m # Rydberg constant
-    Ry = 2.1798723611035e-18 * J  # Rydberg energy, approximately 13.6 eV
+    e = 1.602176634e-19 * C  # charge of proton - https://physics.nist.gov/cgi-bin/cuu/Value?e
+    uBohr = 9.2740100657e-24 * J/T  # Bohr magneton - https://physics.nist.gov/cgi-bin/cuu/Value?mub
+    uNuc = 5.0507837393e-27 * J/T # nuclear magneton - https://physics.nist.gov/cgi-bin/cuu/Value?mun
+    aBohr = 5.29177210544e-11 * m  # Bohr radius - https://physics.nist.gov/cgi-bin/cuu/Value?bohrrada0
+    me = 9.1093837139e-31 * kg  # electron mass - https://physics.nist.gov/cgi-bin/cuu/Value?me
+    mp = 1.67262192595e-27 * kg # proton mass - https://physics.nist.gov/cgi-bin/cuu/Value?mp
+    mn = 1.67492750056e-27 * kg # neutron mass - https://physics.nist.gov/cgi-bin/cuu/Value?mn
+    Rinf = 10973731.568157 / m # Rydberg constant - https://physics.nist.gov/cgi-bin/cuu/Value?ryd
+    Ry = 2.1798723611030e-18 * J  # Rydberg energy, approximately 13.6 eV - https://physics.nist.gov/cgi-bin/cuu/Value?rydhcj
     Hartree = 2*Ry # Hartree energy, approximately 27.2 eV
     ARichardson = (4.*pi*e*me*kB**2) / hPlanck**3  # Richardson constant
     Phi0 = hPlanck / (2*e) # magnetic flux quantum
     KJos = (2*e) / hPlanck # Josephson constant
     RKlitz = hPlanck / e**2 # von Klitzing constant
-    debye = 1e-21*C*m**2/(s*c0) # debye dipole moment, approximately 0.0208 e nm
+    debye = (1e-21 / 299792458) * C*m  # debye electric dipole moment ≈ 0.0208 e·nm
 
     # Constants--astronomical and properties of earth
     global REarth, g0, Msolar, MEarth
