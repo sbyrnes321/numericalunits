@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numericalunits"
+version = "1.26"
+authors = [
+    {name = "Steven Byrnes", email = "steven.byrnes@gmail.com"},
+]
+description = "A package that lets you define quantities with units, which can then be used in almost any numerical calculation in any programming language. Checks that calculations pass dimensional analysis, performs unit conversions, and defines physical constants."
+readme = "README.rst"
+requires-python = ">=3"
+keywords = ["units, quantities, physical constants, dimensional analysis"]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3"
+]
+
+[project.urls]
+Homepage = "http://pypi.python.org/pypi/numericalunits"
+Repository = "https://github.com/sbyrnes321/numericalunits"

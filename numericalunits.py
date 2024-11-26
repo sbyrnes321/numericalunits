@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-For information and usage see README, or http://pypi.python.org/pypi/numericalunits
+For information and usage see README, or https://github.com/sbyrnes321/numericalunits
 """
 # Copyright (C) 2012-2024 Steven J. Byrnes
 #
@@ -12,7 +12,7 @@ For information and usage see README, or http://pypi.python.org/pypi/numericalun
 
 from math import pi
 
-__version__ = 1.25
+__version__ = 1.26
 
 
 ########## Set all variables, to help introspection libraries ################

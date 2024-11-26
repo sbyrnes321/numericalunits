@@ -43,3 +43,5 @@ version 1.24, 2019-11-29 -- drop support for python 2; update to latest CODATA; 
 acceleration-related units.
 
 version 1.25, 2020-11-07 -- add nu_eval() function.
+
+version 1.26, 2024-11-26 -- update to latest CODATA (and add CODATA URLs), add debye unit of dyipole moment, add README_appendix about how to do parallel processing, modernize build / packaging
