@@ -46,4 +46,6 @@ version 1.25, 2020-11-07 -- add nu_eval() function.
 
 version 1.26, 2024-11-26 -- update to latest CODATA (and add CODATA URLs), add debye unit of dipole moment, add README_appendix about how to do parallel processing, modernize build / packaging
 
-version 1.27, 2026-05-01 -- small fix for compatibility with Python 3.14
+version 1.27, 2026-05-15 -- small fix for compatibility with Python 3.14
+
+version 1.28, 2026-05-16 -- another small fix for compatibility with Python 3.14

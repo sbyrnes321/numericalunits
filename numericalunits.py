@@ -12,7 +12,7 @@ For information and usage see README, or https://github.com/sbyrnes321/numerical
 
 from math import pi
 
-__version__ = 1.27
+__version__ = 1.28
 
 
 ########## Set all variables, to help introspection libraries ################
